@@ -1,0 +1,6 @@
+{
+  "name": "com.steinus.perfecttvwebos.network",
+  "version": "0.3.6",
+  "description": "Network fetch bridge for Perfect TV Lite",
+  "main": "service.js"
+}

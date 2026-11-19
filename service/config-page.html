@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Perfect TV Lite — Плейлисты</title>
+<style>
+:root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif}*{box-sizing:border-box}
+body{margin:0;background:#090b0e;color:#f3f4f6;min-height:100vh}
+header{padding:24px max(20px,calc((100vw - 1140px)/2));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #34383d;background:#171a1f}
+.logo{font-weight:700;font-size:24px}.logo span{color:#93bdeb}.sm{font-size:13px;color:#b2b7c0}
+.layout{max-width:1160px;margin:24px auto;padding:0 14px;display:grid;grid-template-columns:minmax(245px,34%) minmax(0,1fr);gap:17px}
+.panel{background:rgba(37,40,45,.94);border:1px solid #494d51;border-radius:15px;padding:22px;min-width:0}
+h1{font-size:27px;margin:0 0 6px}h2{font-size:22px;margin:0 0 17px}h3{margin:0 0 14px;font-size:18px}p{line-height:1.5;color:#bdc4ce}
+.list{display:flex;flex-direction:column;gap:8px;max-height:56vh;overflow:auto}.profile{display:block;width:100%;text-align:left;padding:14px;border:1px solid #535960;background:#1e2228;color:#f6f7f8;border-radius:9px;cursor:pointer}
+.profile.selected{background:#e1e4e8;color:#141920;border-color:#fff}.profile.active:not(.selected){border-color:#8cb5de}
+.profile-title{font-size:17px;font-weight:700;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.profile-sub{margin-top:6px;display:block;font-size:13px;opacity:.77}
+button{cursor:pointer;font-family:inherit}.btn{background:#3c4149;color:#f5f6f8;padding:12px 17px;border:1px solid #666d76;border-radius:9px;font-size:15px}
+.file-picker{display:inline-block;cursor:pointer;font-weight:500;margin:10px 8px 0 0}
+.btn.primary{background:#e0e2e6;color:#16191e;font-weight:700;border-color:white}.btn.danger{border-color:#b96b6b}.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}.row>*{flex:1}.row>button{flex:0 0 auto}
+label{display:block;color:#e5e8ed;font-size:15px;margin:15px 0 6px;font-weight:600}
+input[type=text],input[type=url]{display:block;width:100%;min-width:0;color:#f8f9fb;background:#13181f;border:1px solid #63707f;border-radius:8px;padding:12px;font-size:16px}
+input[type=file]{display:block;width:100%;font-size:15px;margin-top:9px;color:#d9e1ee}
+input:focus,button:focus{outline:2px solid #b5d7fc;outline-offset:1px}
+.source{display:flex;gap:16px;background:#1a1e24;padding:14px;border-radius:9px;margin-top:20px;border:1px solid #474d54}
+.source label{display:flex;gap:8px;align-items:center;margin:0;font-size:15px;font-weight:500;cursor:pointer}
+.hidden{display:none!important}.hint{font-size:14px;color:#afc0ce;line-height:1.45;margin:11px 0}
+#message{margin-top:14px;min-height:40px;white-space:pre-wrap;border-radius:8px;line-height:1.45;font-size:14px}.ok{color:#a9e1b9}.err{color:#ffc1c1}
+.notice{grid-column:1/-1;margin:0 4px 22px}.muted{color:#9facbd}.pill{display:inline-block;margin-left:8px;background:#39516a;padding:3px 7px;border-radius:5px;font-size:12px}
+@media(max-width:750px){.layout{display:block;margin:14px auto}.panel{margin-bottom:14px;padding:18px}.list{max-height:260px}header{padding:19px 18px}.logo{font-size:21px}}
+</style>
+</head>
+<body>
+<header><div class="logo">Perfect <span>TV Lite</span></div><div class="sm">Настройки на телевизоре · LAN</div></header>
+<div class="layout">
+<section class="panel"><h2>Плейлисты <span id="playlistCount" class="pill">0</span></h2>
+<div id="profiles" class="list"></div>
+<div class="row"><button id="addProfile" class="btn primary" type="button">+ Добавить</button><button id="deleteProfile" class="btn danger" type="button">Удалить</button></div>
+<p class="hint">Нажми на плейлист для редактирования. Кнопка «Сделать активным» переключает профиль на телевизоре.</p></section>
+<section class="panel"><h1 id="editorTitle">Плейлист</h1><p class="muted">Добавляй M3U по адресу или из файла, который уже скачан на компьютер или телефон.</p>
+<form id="editor" autocomplete="off">
+<label for="title">Название</label><input id="title" type="text" maxlength="100" placeholder="Yosso TV">
+<label for="epg">XMLTV EPG (необязательно)</label><input id="epg" type="url" maxlength="4096" placeholder="http://epg.example/epg.xml.gz">
+<div class="source" role="radiogroup" aria-label="Источник M3U"><label><input type="radio" name="source" value="url" checked> Ссылка M3U</label><label><input type="radio" name="source" value="file"> Файл M3U</label></div>
+<div id="urlPanel"><label for="url">Адрес M3U</label><input id="url" type="url" maxlength="4096" placeholder="https://provider.example/playlist.m3u8"></div>
+<div id="filePanel" class="hidden"><label for="m3uFile">Выбрать M3U-файл</label><input id="m3uFile" class="hidden" type="file" accept=".m3u,.m3u8,.txt,text/plain,application/x-mpegurl,application/vnd.apple.mpegurl"><label for="m3uFile" class="btn file-picker">Выбрать файл M3U</label> <span id="chosenFilename" class="hint">Файл не выбран</span><p id="fileHint" class="hint">Импорт сразу создаст кэш на телевизоре; повторное скачивание через провайдера не понадобится. До 12 МБ.</p></div>
+<div class="row"><button id="saveProfile" type="submit" class="btn primary">Сохранить</button><button id="activateProfile" type="button" class="btn">Сделать активным</button></div>
+</form><div id="message" role="status"></div></section>
+<p class="notice hint">Для работы веб-редактора оставь раздел «Плейлисты» открытым на телевизоре. Изменения синхронизируются автоматически. Импортированные файлы сохраняются в сжатом кэше, а плейлист с URL можно по-прежнему обновить вручную. Используй веб-редактор только в доверенной домашней сети: HTTP не зашифрован.</p>
+</div>
+<script>
+(function(){'use strict';
+var token=new URLSearchParams(location.search).get('t')||'';
+var state={playlists:[],activePlaylistId:''},selectedId='',newProfile=false,working=false;
+function by(id){return document.getElementById(id);}
+function msg(t,bad){by('message').textContent=t||'';by('message').className=bad?'err':'ok';}
+function safe(s){return String(s==null?'':s);}
+function api(method,path,body){return fetch(path+'?t='+encodeURIComponent(token),{method:method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,cache:'no-store'}).then(function(response){return response.json().then(function(data){if(!response.ok||data.returnValue===false)throw Error(data.errorText||'Ошибка сервера '+response.status);return data;});});}
+function activeProfile(){return state.playlists.filter(function(p){return p.id===selectedId;})[0]||null;}
+function setSource(val){var elements=document.querySelectorAll('input[name=source]');for(var i=0;i<elements.length;i++)elements[i].checked=elements[i].value===val;
+ by('urlPanel').classList.toggle('hidden',val!=='url');by('filePanel').classList.toggle('hidden',val!=='file');}
+function source(){var checked=document.querySelector('input[name=source]:checked');return checked?checked.value:'url';}
+function showEditor(p){by('title').value=p?safe(p.title):'';by('epg').value=p?safe(p.epg):'';by('url').value=p&&p.source!=='file'?safe(p.url):'';by('m3uFile').value='';by('chosenFilename').textContent='Файл не выбран';setSource(p&&p.source==='file'?'file':'url');
+ by('editorTitle').textContent=p?'Редактировать: '+safe(p.title):'Новый плейлист';by('activateProfile').disabled=!p||p.id===state.activePlaylistId;
+ by('fileHint').textContent=p&&p.source==='file'?'Для замены файла выбери новый M3U. Если ничего не выбирать, можно изменить только название и EPG.':'M3U будет загружен на телевизор и сохранён в кэше. Не нужно скачивать его через провайдера.';}
+function draw(){var box=by('profiles');box.innerHTML='';by('playlistCount').textContent=state.playlists.length+'/12';
+ state.playlists.forEach(function(p){var b=document.createElement('button');b.type='button';b.className='profile'+(p.id===selectedId&&!newProfile?' selected':'')+(p.id===state.activePlaylistId?' active':'');
+ var title=document.createElement('span');title.className='profile-title';title.textContent=(p.id===state.activePlaylistId?'▶ ':'')+safe(p.title);b.appendChild(title);
+ var sub=document.createElement('span');sub.className='profile-sub';sub.textContent=(p.source==='file'?'Файл M3U':'Ссылка M3U')+(p.id===state.activePlaylistId?' · активен':'');b.appendChild(sub);
+ b.onclick=function(){selectedId=p.id;newProfile=false;draw();};box.appendChild(b);});
+ var p=newProfile?null:activeProfile();showEditor(p);
+ by('deleteProfile').disabled=!p||state.playlists.length<=1;by('addProfile').disabled=state.playlists.length>=12;}
+function load(keep){return api('GET','/api/state').then(function(data){state=data;var ids=state.playlists.map(function(p){return p.id;});if(!keep||(!newProfile&&ids.indexOf(selectedId)<0))selectedId=state.activePlaylistId||ids[0]||'';draw();});}
+function afterChange(text){msg(text,false);return load(true);}
+function withBusy(f){if(working)return;working=true;by('saveProfile').disabled=true;Promise.resolve().then(f).catch(function(e){msg(e.message||String(e),true);}).then(function(){working=false;by('saveProfile').disabled=false;});}
+function upload(file,meta){return new Promise(function(resolve,reject){if(!file){reject(Error('Выбери файл M3U'));return;}if(file.size>12*1024*1024){reject(Error('Файл больше 12 МБ'));return;}
+ var request=new XMLHttpRequest();request.open('POST','/api/upload?t='+encodeURIComponent(token),true);request.setRequestHeader('Content-Type','application/octet-stream');request.setRequestHeader('X-PTV-Meta',encodeURIComponent(JSON.stringify(meta)));
+ request.upload.onprogress=function(e){if(e.lengthComputable)msg('Передаю файл: '+Math.round(e.loaded/e.total*100)+'%');};
+ request.onload=function(){var r={};try{r=JSON.parse(request.responseText);}catch(_){reject(Error('Неверный ответ телевизора'));return;}
+ if(request.status<200||request.status>=300||r.returnValue===false)reject(Error(r.errorText||'Ошибка импорта '+request.status));else resolve(r);};
+ request.onerror=function(){reject(Error('Не удалось передать файл в локальной сети'));};request.send(file);});}
+by('editor').onsubmit=function(e){e.preventDefault();withBusy(function(){var old=activeProfile(),file=by('m3uFile').files[0],meta={id:newProfile?'':selectedId,title:by('title').value.trim(),epg:by('epg').value.trim(),activate:newProfile||!old||selectedId===state.activePlaylistId};
+ if(source()==='file'&&file)return upload(file,meta).then(function(r){newProfile=false;selectedId=r.id;return afterChange('Файл M3U сохранён на телевизоре. Профиль появится в настройках ТВ в течение нескольких секунд.');});
+ if(source()==='file'&&(!old||old.source!=='file'))throw Error('Выбери M3U-файл');
+ if(source()==='url')meta.url=by('url').value.trim();meta.source=source();
+ if(source()==='file')meta.source='file';
+ return api('POST','/api/profile',meta).then(function(r){newProfile=false;selectedId=r.id;return afterChange('Настройки плейлиста сохранены.');});});};
+by('m3uFile').onchange=function(){by('chosenFilename').textContent=this.files&&this.files.length?this.files[0].name:'Файл не выбран';};
+by('addProfile').onclick=function(){if(state.playlists.length>=12)return;newProfile=true;selectedId='';draw();msg('Выбери источник: адрес или файл M3U.');};
+by('deleteProfile').onclick=function(){var p=activeProfile();if(!p||state.playlists.length<=1)return;if(!confirm('Удалить плейлист «'+safe(p.title)+'»?'))return;withBusy(function(){return api('POST','/api/delete',{id:p.id}).then(function(){newProfile=false;selectedId=state.activePlaylistId;return afterChange('Плейлист удалён.');});});};
+by('activateProfile').onclick=function(){var p=activeProfile();if(!p)return;withBusy(function(){return api('POST','/api/activate',{id:p.id}).then(function(){return afterChange('Выбранный плейлист активирован на телевизоре.');});});};
+var radios=document.querySelectorAll('input[name=source]');for(var i=0;i<radios.length;i++)radios[i].onchange=function(){setSource(source());};
+load(false).catch(function(e){msg(e.message||String(e),true);});
+})();
+</script>
+</body>
+</html>

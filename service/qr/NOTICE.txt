@@ -1,0 +1,4 @@
+QRCode for JavaScript, copyright (c) 2009 Kazuhiko Arase.
+MIT License. Source originally at https://github.com/kazuhikoarase/qrcode-generator
+Included via the Apache-2.0-licensed qrcode-terminal package's vendor/QRCode.
+See the LICENSE-THIRD-PARTY file in the service directory.

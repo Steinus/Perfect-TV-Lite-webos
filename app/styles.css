@@ -1,0 +1,867 @@
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;background:#070b14;color:#f6f8fc;font-family:Arial,"Helvetica Neue",sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}button:focus,input:focus,.channel-item:focus,.group-item:focus{outline:3px solid #64b7ff;outline-offset:-2px}#app{width:100%;height:100%;position:relative;background:radial-gradient(ellipse at 80% 10%,#1b2944,transparent 52%),#070b14}#video{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:contain;background:#000}#video.hidden{display:none}.idle{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse at 68% 20%,#233153 0,transparent 50%),linear-gradient(130deg,#101828,#05080f)}.idle-art{position:relative;margin-bottom:16px;display:flex;align-items:center;justify-content:center;width:190px;height:190px;background:linear-gradient(135deg,#2563eb,#07b6d5);border-radius:48px;box-shadow:0 0 95px rgba(32,120,209,0.345);transform:rotate(-6deg)}.triangle{font-size:100px;padding-left:8px;transform:rotate(6deg)}.idle h1{font-size:75px;margin:10px 0 0;letter-spacing:-4px}.idle h1 span{color:#60b8ff}.idle p{font-size:28px;color:#8ea8c6;margin:12px 0 22px}.idle small{font-size:20px;color:#9eafc4}#topline{position:absolute;top:0;left:0;right:0;z-index:2;padding:22px 34px 20px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;background:linear-gradient(rgba(0,0,0,0.600),transparent)}.brand-mini{font-size:24px;font-weight:800;letter-spacing:-.6px}.brand-mini span{color:#4aa8ff}.brand-icon{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#1d7fe4;color:white!important;border-radius:10px;font-size:15px;margin-right:7px}.webos-tag{font-size:12px;font-weight:600;margin-left:10px;background:#24354a;border:1px solid #476383;padding:4px 8px;vertical-align:middle;letter-spacing:1px;border-radius:5px}#clock{font-size:23px;font-variant-numeric:tabular-nums;color:#d9e3ef}.sidebar{position:absolute;z-index:5;top:0;left:0;bottom:0;width:700px;max-width:46vw;min-width:480px;display:flex;flex-direction:column;background:linear-gradient(135deg,rgba(16,28,46,0.973),rgba(12,18,32,0.980));box-shadow:20px 0 75px rgba(0,0,0,0.800);transform:translateX(-105%);transition:transform .18s ease;border-right:1px solid #2d3d55}.sidebar.open{transform:translateX(0)}.side-head{display:flex;align-items:center;justify-content:space-between;padding:80px 28px 12px}.side-heading{font-size:34px;font-weight:700;letter-spacing:-1px}.side-heading span{font-size:18px;color:#79a6ca;background:#1f3548;border-radius:8px;padding:5px 10px;vertical-align:middle;margin-left:8px}.circle-btn{width:53px;height:53px;background:#23354d;border:1px solid #3d526d;border-radius:16px;font-size:26px;color:#d8eeff}.circle-btn:hover{background:#356495}.playlist-bar{display:flex;padding:3px 28px 18px;color:#a9bcce;font-size:19px;align-items:center;white-space:nowrap}.playlist-bar>span{min-width:0;overflow:hidden;text-overflow:ellipsis;flex:1}.text-btn{padding:4px 13px;background:#1b2a3c;border-radius:7px;font-size:28px;color:#cfe5ff}.filter-controls{padding:0 22px 18px;display:flex;flex-wrap:wrap}.filter-controls .mode{font-size:18px;padding:13px 15px;border-radius:11px;background:#1b283a;color:#a9bacd;border:1px solid #35445b}.filter-controls .mode.active{background:#235489;color:#fff;border-color:#429dff}.search-box{display:flex;padding:0 25px 16px}.search-box input{flex:1;width:80%;min-width:0;border:1px solid #466481;background:#071224;color:#fff;border-radius:9px;padding:14px 16px;font-size:22px}.search-box button{background:#233b56;font-size:28px;width:50px;border-radius:9px}.groups{display:flex;flex-wrap:wrap;padding:4px 26px 16px;max-height:150px;overflow:auto}.group-item{background:#263b50;color:#c6d9ea;font-size:17px;border:1px solid #38516a;border-radius:8px;padding:10px 13px}.group-item.active{background:#2261a1;color:#fff;border-color:#48a5f1}.list{flex:1;overflow-y:auto;overflow-x:hidden;padding:2px 16px 20px;scrollbar-color:#45637f #102035;scrollbar-width:thin}.empty-list{padding:65px 20px;color:#b5cce0;font-size:23px;text-align:center;line-height:1.4}.channel-item{height:90px;min-height:90px;width:100%;padding:11px 13px;display:flex;align-items:center;background:transparent;border:1px solid transparent;border-radius:13px;text-align:left;color:#ecf4fa}.channel-item:hover,.channel-item:focus{background:#263d59;border-color:#4c8ed0}.channel-item.playing{background:#1b3b5e;border-color:#3473b4}.channel-number{width:38px;flex-shrink:0;text-align:center;color:#7998b9;font-size:17px}.channel-logo{width:72px;height:57px;border-radius:10px;flex-shrink:0;background:#17283d;object-fit:contain;border:1px solid #2e4158;padding:3px}.logo-fallback{display:flex;align-items:center;justify-content:center;color:#73aef3;font-size:21px;font-weight:bold}.channel-info{min-width:0;flex:1}.channel-name{font-size:22px;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.channel-program{color:#8daecb;font-size:17px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.favorite-toggle{color:#6985a5;background:transparent;border-radius:10px;font-size:27px;padding:12px 6px}.favorite-toggle.on{color:#ffd368}.favorite-toggle:focus{background:#344b68}.sidebar-footer{padding:15px 22px;border-top:1px solid #223b54;display:flex;justify-content:space-between;color:#7196b9;font-size:15px}.player-info{position:absolute;z-index:3;bottom:30px;left:42px;right:42px;padding:25px 30px;max-width:900px;background:linear-gradient(105deg,rgba(7,26,47,0.910),rgba(13,23,41,0.784));border:1px solid rgba(70,123,171,0.404);border-radius:20px;pointer-events:none}.player-name{font-size:36px;font-weight:700}.player-epg{font-size:22px;color:#b2cde6;padding-top:8px}.player-hint{font-size:17px;color:#8db3d3;margin-top:11px}.loading{position:absolute;z-index:12;top:23px;left:50%;transform:translateX(-50%);display:flex;align-items:center;background:rgba(17,30,50,0.941);border:1px solid #346086;padding:16px 23px;border-radius:14px;font-size:19px}.spinner{width:24px;height:24px;border:3px solid #335578;border-top-color:#70bfff;border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.modal{position:absolute;z-index:20;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;background:rgba(2,9,19,0.851);padding:35px;align-items:center;justify-content:center}.modal-panel{width:880px;max-width:93vw;max-height:95vh;overflow:auto;border-radius:24px;padding:38px;background:#111f30;border:1px solid #385374;box-shadow:0 35px 100px rgba(0,0,0,0.667)}.modal-top{display:flex;justify-content:space-between;align-items:flex-start}.eyebrow{color:#74b6f1;letter-spacing:2.6px;font-size:13px;font-weight:800}.modal-top h2{font-size:42px;margin:5px 0}.muted{color:#9fb4ca;font-size:19px;line-height:1.45;margin:4px 0 23px}.field{margin-bottom:22px}.field label{display:block;font-size:18px;color:#b5cce6;margin-bottom:8px;font-weight:700}.field input{width:100%;font-size:21px;padding:17px 18px;background:#071626;border:1px solid #41627d;color:#f5fbff;border-radius:11px}.field input::placeholder{color:#55718b}.action-row{display:flex;gap:15px}.btn{font-size:20px;background:#29415d;color:#d2e8ff;border-radius:11px;border:1px solid #41658a;padding:16px 23px}.btn-primary{background:#2074c8;color:#fff;border-color:#3396ec;font-weight:700}.btn:hover,.btn:focus{filter:brightness(1.25)}.statusline{font-size:17px;color:#98aec5;margin:21px 0}.epg-status{margin-top:-7px;line-height:1.35;word-break:break-word}.statusline.ok{color:#86daaf}.statusline.bad{color:#ffb097}.helpbox{background:#0b1625;color:#839fb9;font-size:17px;line-height:1.55;border:1px solid #253950;border-radius:13px;padding:19px}.helpbox b{color:#c4d9ec}.toast{position:absolute;z-index:30;bottom:42px;left:50%;transform:translateX(-50%);font-size:19px;color:#fff;background:rgba(30,59,86,0.933);border:1px solid #458bc6;border-radius:13px;padding:17px 25px;max-width:65vw;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.600);pointer-events:none}.hidden{display:none!important}@media(max-width:1200px){.sidebar{min-width:430px;width:53vw}.side-head{padding-top:68px}.side-heading{font-size:28px}.filter-controls .mode{font-size:15px;padding:10px}.channel-item{min-height:74px}.channel-name{font-size:19px}.channel-program{font-size:14px}.player-info{bottom:15px}.player-name{font-size:30px}.modal-panel{padding:30px}}
+
+/* webOS 4.x / Chromium 53 compatibility and virtual list sizing. */
+.list-spacer{height:0;pointer-events:none}.list-rows{width:100%}.channel-item{height:90px;min-height:90px;max-height:90px}.modal{display:flex}.modal-panel{overflow-y:auto}.idle-art{display:flex}.brand-icon{display:inline-flex}
+
+/* Flex-gap fallbacks for webOS 4.x (Chromium 53). */
+.playlist-bar>*+*{margin-left:10px}
+.filter-controls .mode{margin-right:8px;margin-bottom:8px}
+.search-box>*+*{margin-left:8px}
+.groups .group-item{margin-right:8px;margin-bottom:8px}
+.channel-item>*+*{margin-left:16px}
+.action-row>*+*{margin-left:15px}
+.loading .spinner{margin-right:17px}
+
+/* 0.1.3: explicit labeled buttons; SVG icons work without emoji/icon fonts on webOS 4. */
+.labeled-btn{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;background:#223b56;border:1px solid #46627d;border-radius:10px;color:#dfedfb;padding:10px 12px;font-size:17px;min-height:43px;line-height:1.1}
+.labeled-btn svg,.search-icon{display:inline-block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-right:8px;vertical-align:middle}
+.settings-action{padding:11px 12px;font-size:16px;max-width:151px}
+.reload-action{font-size:16px;min-height:40px;padding:8px 11px}
+.filter-controls .mode{white-space:nowrap}.filter-controls .mode .search-icon{width:18px;height:18px;margin-right:5px}
+.groups{max-height:205px;align-content:flex-start;overscroll-behavior:contain}
+.group-item{min-height:42px;line-height:1.1}
+.labeled-btn:focus,.labeled-btn:hover{background:#335875}
+
+.epg-debug{font-size:15px;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;color:#a8bfd1;background:#0b1927;border-radius:8px;margin:4px 0 14px;padding:8px 14px;max-height:180px;overflow-y:auto}.epg-debug:empty{display:none}
+
+/* 0.1.8-0.1.9: EPG timeline, player OSD, compatible with webOS 4.x / Chromium 53. */
+.guide-panel{position:absolute;z-index:4;top:52px;bottom:25px;left:735px;right:28px;display:flex;flex-direction:column;border-radius:18px;background:linear-gradient(125deg,rgba(12,26,45,.969),rgba(8,17,31,.958));border:1px solid #304b67;box-shadow:0 18px 60px rgba(0,0,0,.58);overflow:hidden}
+.guide-head{padding:27px 32px 13px;border-bottom:1px solid #294058}
+.guide-label{font-size:13px;color:#75b7ec;font-weight:800;letter-spacing:2px}
+.guide-channel{display:flex;align-items:center;margin-top:12px}
+.guide-logo{width:76px;height:62px;object-fit:contain;border-radius:9px;background:#14263d;margin-right:18px}
+.guide-channel h2{font-size:29px;line-height:1.15;margin:0;color:#f0f7fd}
+.guide-range{font-size:15px;color:#8dabc8;margin-top:9px}
+.guide-selected{min-height:133px;max-height:193px;overflow:hidden;padding:15px 32px;border-bottom:1px solid #243c56;background:#162e49}
+.guide-selected-time{font-size:15px;color:#85b5e4}
+.guide-selected-title{font-size:24px;font-weight:700;margin:6px 0;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.guide-selected-desc{font-size:16px;line-height:1.35;color:#aabfd6;max-height:90px;overflow:hidden;white-space:pre-line}
+.guide-navhint{padding:10px 30px;color:#81a4c4;font-size:15px}
+.guide-rows{flex:1;overflow-y:auto;overflow-x:hidden;padding:7px 22px 18px}
+.guide-date{font-size:15px;font-weight:800;color:#74b7f3;padding:16px 10px 7px;text-transform:capitalize}
+.guide-row{display:flex;align-items:flex-start;width:100%;border:1px solid transparent;border-radius:10px;text-align:left;background:transparent;color:#dbeaf9;padding:11px 14px;min-height:62px}
+.guide-row .guide-time{flex:0 0 105px;color:#88a8c7;font-size:17px;margin-right:13px;white-space:nowrap}
+.guide-row .guide-program{font-size:18px;flex:1;line-height:1.3;word-break:break-word}
+.guide-row.guide-onair{background:#173654;border-color:#2f6ba2}
+.guide-row.guide-past .guide-program{color:#8197b0}
+.guide-row:focus,.guide-row:hover{background:#245386;border-color:#64b4f7;color:white}
+.guide-row:focus .guide-program{color:white}
+.guide-empty{padding:35px 12px;color:#b4c8de;font-size:19px;line-height:1.5}
+.guide-footer{border-top:1px solid #294058;color:#7598b6;font-size:14px;padding:13px 28px}
+.player-info{max-width:1120px;bottom:30px;padding:24px 31px;max-height:70vh;overflow:hidden}
+.player-head{display:flex;align-items:center;margin-bottom:17px}
+.player-logo{width:84px;height:70px;object-fit:contain;background:#162e46;border-radius:9px;margin-right:20px}
+.player-title-group{min-width:0;flex:1}
+.player-name{font-size:34px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-group{font-size:17px;color:#9bb9d5;margin-top:7px}
+.live-tag{display:inline-block;background:#a32d37;border:1px solid #e34c61;border-radius:8px;color:#fff;font-size:15px;font-weight:bold;padding:8px 13px;margin-left:16px}
+.player-line{display:flex;align-items:baseline;margin:11px 0}
+.player-label{width:92px;flex:0 0 92px;font-size:17px;color:#78b8ee;font-weight:700}
+.player-epg{font-size:21px;color:#e2edf6;flex:1;padding:0}
+.player-description{font-size:17px;color:#b3c9dd;line-height:1.4;white-space:normal;max-height:82px;overflow:hidden;margin:10px 0 14px 92px}
+.player-stats{border-top:1px solid #3c556f;padding-top:16px;display:flex;flex-wrap:wrap;font-size:16px;color:#bbd7f0}
+.player-stats span{margin-right:24px;margin-bottom:5px}
+.player-hint{border-top:1px solid #30435b;padding-top:11px;font-size:14px;color:#8caec9}
+#topline{z-index:6}
+@media(max-width:1200px){.guide-panel{left:55vw;right:12px;top:35px;bottom:18px}.guide-head{padding:15px}.guide-selected{padding:13px}.guide-rows{padding:5px}.guide-row{padding:8px}.guide-channel h2{font-size:22px}.guide-row .guide-time{flex-basis:76px}.player-name{font-size:26px}}
+
+/* 0.1.9: full-width player info and modal-like playback EPG. */
+.player-info{left:36px;right:36px;bottom:28px;max-width:none;width:auto;margin:0;padding:24px 30px;max-height:65vh}
+.player-description{max-height:112px;margin-bottom:16px;line-height:1.45}
+.player-hint{margin-top:12px}
+.guide-panel.playback-guide{z-index:9;top:36px;bottom:36px;left:7vw;right:7vw;background:linear-gradient(120deg,rgba(11,26,45,.985),rgba(6,16,32,.985));border:1px solid #568bc0;box-shadow:0 12px 100px rgba(0,0,0,.8)}
+.guide-panel.playback-guide .guide-selected{min-height:140px}
+.sidebar.playback-group .filter-controls,.sidebar.playback-group .groups,.sidebar.playback-group .search-box,.sidebar.playback-group .settings-action,.sidebar.playback-group .reload-action{display:none!important}
+.sidebar.playback-group .playlist-bar{padding-bottom:20px}
+.sidebar.playback-group .side-heading{font-size:27px}
+.sidebar.playback-group .sidebar-footer{font-size:14px}
+@media(max-width:1200px){.player-info{left:18px;right:18px;bottom:17px}.guide-panel.playback-guide{left:4vw;right:4vw;top:20px;bottom:20px}}
+
+/* 0.2.0: configurable LAN editor, collapsed groups and archive seek overlay. */
+.sidebar .groups.hidden{display:none!important}
+.remote-settings{border:1px solid #375575;border-radius:14px;background:#0c1b2b;padding:18px;margin:20px 0 24px}
+.remote-heading{font-size:20px;font-weight:700;color:#e2f1ff;margin-bottom:8px}
+.remote-status{color:#93b9d8;font-size:16px;min-height:24px;margin-bottom:10px}
+.remote-body{display:flex;align-items:center;min-height:135px}
+.remote-qr{width:240px;min-width:240px;min-height:185px;display:flex;align-items:center;justify-content:center}
+.remote-qr svg{width:205px;height:205px;border-radius:8px;background:#fff}
+.remote-details{min-width:0;flex:1;font-size:16px;color:#aac9e3;line-height:1.4;padding-left:13px}
+.remote-address{font-size:22px;color:#fff;font-weight:bold;overflow-wrap:break-word;margin-top:8px}
+.remote-pin{font-size:19px;font-weight:bold;color:#ffe096;margin-top:9px}
+.remote-help{font-size:14px;color:#88a6c1;margin-top:10px}
+.archive-seek{position:absolute;left:36px;right:36px;bottom:34px;z-index:10;background:rgba(8,24,42,.88);border:1px solid #3d76ac;border-radius:17px;padding:20px 30px;color:#eaf6ff}
+.seek-title{font-size:24px;font-weight:bold;margin-bottom:16px}
+.seek-track{height:9px;border-radius:8px;background:#304866;overflow:hidden}
+.seek-fill{height:9px;width:0;background:#40a2ed}
+.seek-hints{display:flex;justify-content:space-between;margin-top:12px;color:#abc9e1;font-size:17px}
+.live-tag.archive-tag{background:#286eab;border-color:#60b8f3}
+.guide-row.guide-past{position:relative}
+.guide-row.archive-available .guide-time:before{content:'▶';display:inline;color:#67c4ff;font-size:13px;margin-right:5px}
+@media(max-width:1200px){.remote-qr{width:170px;min-width:170px}.remote-qr svg{width:145px;height:145px}.remote-details{font-size:14px}.remote-address{font-size:16px}}
+
+/* Polish: 30% greater transparency during playback; QR followed by LAN URL. */
+.player-info{background:linear-gradient(105deg,rgba(7,26,47,.64),rgba(13,23,41,.55))}
+.guide-panel.playback-guide{background:linear-gradient(120deg,rgba(11,26,45,.70),rgba(6,16,32,.70))}
+.sidebar.open.playing-overlay{background:linear-gradient(135deg,rgba(16,28,46,.78),rgba(12,18,32,.77))}
+.remote-body{align-items:center}
+.remote-code-column{min-width:248px;text-align:center;max-width:290px}
+.remote-code-column .remote-address{font-size:17px;word-wrap:break-word;margin-top:7px}
+.remote-code-column .remote-qr{width:100%;min-width:0;margin:auto}
+.remote-details{padding:0 10px 0 22px;align-self:center}
+@media(max-width:1200px){.remote-code-column{min-width:175px}.remote-details{padding-left:12px}}
+
+/* 0.2.1: archive timeline OSD. Older webOS Chromium 53 compatible, no CSS grid. */
+.archive-controls{position:absolute;z-index:11;left:3.5%;right:3.5%;bottom:4%;padding:26px 34px 23px;border-radius:19px;box-shadow:0 15px 65px rgba(0,0,0,.62);border:1px solid rgba(102,171,222,.62);background:linear-gradient(110deg,rgba(8,22,40,.91),rgba(10,30,51,.89));color:#f6fbff;pointer-events:auto;max-height:84vh;overflow:hidden}
+.archive-top{display:flex;align-items:center;min-width:0}
+.archive-channel-logo{height:74px;width:88px;object-fit:contain;border-radius:13px;border:1px solid #385473;background:rgba(17,37,58,.65);padding:6px;margin-right:23px;flex-shrink:0}
+.archive-title-box{min-width:0;flex:1}
+.archive-eyebrow{font-size:16px;color:#86c2f5;font-weight:bold;letter-spacing:.8px}
+.archive-program-title{font-size:30px;font-weight:bold;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:7px 0}
+.archive-program-time{font-size:16px;color:#b2c9df}
+.archive-chip{font-size:14px;background:rgba(168,48,64,.82);border:1px solid #f46679;border-radius:9px;padding:9px 14px;font-weight:bold;margin-left:15px}
+.archive-program-desc{font-size:18px;line-height:1.45;color:#c2d5e7;max-height:56px;overflow:hidden;margin:16px 0 20px;white-space:normal}
+.archive-scrub-head{display:flex;justify-content:space-between;font-size:17px;color:#bcd6ed;margin-bottom:12px}.archive-scrub-head strong{color:#fff;font-size:19px}
+.archive-timeline{display:block;width:100%;height:42px;padding:0 8px;border:1px solid transparent;border-radius:14px;background:rgba(21,51,77,.38);position:relative;outline:none!important}
+.archive-timeline:focus{border-color:#5db7ff;background:rgba(32,84,130,.44);box-shadow:0 0 0 2px rgba(72,164,239,.42)}
+.archive-rail{display:block;position:absolute;top:18px;height:8px;left:18px;right:18px;border-radius:7px;background:#48647e}
+.archive-progress{display:block;position:absolute;top:0;bottom:0;left:0;width:0;background:#43b7fc;border-radius:7px}
+.archive-dot{display:block;position:absolute;top:-7px;width:22px;height:22px;margin-left:-11px;background:#fff;border:4px solid #3c9be5;border-radius:50%;box-shadow:0 0 10px rgba(90,184,252,.6)}
+.archive-time-legend{display:flex;align-items:center;justify-content:space-between;font-size:17px;color:#a9c8e5;margin-top:9px}
+.archive-time-legend span:nth-child(2){color:#fff;font-weight:bold}
+.archive-seek-status{font-size:17px;color:#8bc7f5;min-height:26px;margin:16px 0 13px}
+.archive-buttons{display:flex;gap:15px;justify-content:flex-start}
+.archive-action{min-width:240px;background:rgba(47,84,122,.82);color:#edf7ff;border:1px solid #6b97c2;border-radius:12px;padding:15px 24px;font-size:20px;font-weight:bold}
+.archive-action:focus{outline:3px solid #7fd0ff;background:#2769a2}
+.archive-action-icon{display:inline-block;min-width:28px;margin-right:8px;font-size:22px;vertical-align:middle}
+.archive-live{background:rgba(25,83,75,.85);border-color:#4c9e93}
+.archive-live-dot{display:inline-block;width:11px;height:11px;background:#ff5c62;border-radius:50%;margin-right:10px}
+.archive-footnote{font-size:15px;color:#9ab6d0;margin-top:15px}
+@media(max-width:1200px){.archive-controls{left:2%;right:2%;bottom:2%;padding:15px 20px}.archive-program-title{font-size:23px}.archive-program-desc{font-size:15px;max-height:50px}.archive-action{font-size:16px;padding:12px;min-width:185px}}
+
+/* 0.2.2: independently focusable favorites (D-pad right, OK), no nested buttons. */
+.channel-row{position:relative;width:100%;height:90px;min-height:90px;max-height:90px}
+.channel-row .channel-item{padding-right:74px;margin:0}
+.channel-row .favorite-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:1;width:51px;height:56px;padding:0;text-align:center;border:1px solid transparent;background:transparent;line-height:52px;outline:none}
+.channel-row .favorite-toggle:focus,.channel-row .favorite-toggle:hover{background:#315980;border:2px solid #64b7ff;outline:2px solid #64b7ff;outline-offset:1px;color:#fff}
+.channel-row .favorite-toggle.on{color:#ffd368}
+
+/* 0.2.3: same glass-like transparency as the on-screen channel information panel.
+   Applies to the side channel list and both EPG layouts while video is playing.
+   Use rgba backgrounds (not opacity on the container) to keep text/logos solid. */
+.sidebar.open.playing-overlay,
+.guide-panel,
+.guide-panel.playback-guide {
+  background:linear-gradient(105deg,rgba(7,26,47,.64),rgba(13,23,41,.55));
+}
+.guide-selected { background:rgba(22,46,73,.55); }
+.guide-row.guide-onair { background:rgba(23,54,84,.55); }
+.guide-row:focus,.guide-row:hover { background:rgba(36,83,134,.65); }
+.sidebar.open.playing-overlay .channel-item:focus,
+.sidebar.open.playing-overlay .channel-item:hover { background:rgba(38,61,89,.65); }
+.sidebar.open.playing-overlay .channel-item.playing { background:rgba(27,59,94,.60); }
+
+
+/* 0.2.4: readability from the LG sofa: hints and programme/channel descriptions.
+   Keep the dimensions of controls and the transparency of 0.2.3 unchanged. */
+.player-description{font-size:19px;line-height:1.48;max-height:132px}
+.guide-selected-desc{font-size:18px;line-height:1.45;max-height:105px}
+.archive-program-desc{font-size:20px;line-height:1.45;max-height:66px}
+.channel-program{font-size:18px}
+.player-hint{font-size:16px;line-height:1.45}
+.sidebar-footer{font-size:17px;line-height:1.4}
+.sidebar.playback-group .sidebar-footer{font-size:16px;line-height:1.4}
+.guide-navhint{font-size:17px;line-height:1.35}
+.guide-footer{font-size:16px;line-height:1.35}
+.archive-footnote{font-size:17px;line-height:1.4}
+.archive-seek-status{font-size:19px;line-height:1.35}
+.helpbox{font-size:18px;line-height:1.5}
+@media(max-width:1200px){
+  .channel-program{font-size:16px}
+  .archive-program-desc{font-size:17px;max-height:60px}
+  .sidebar-footer{font-size:15px}
+  .sidebar.playback-group .sidebar-footer{font-size:15px}
+  .player-hint{font-size:15px}
+  .guide-selected-desc{font-size:17px}
+  .guide-navhint{font-size:16px}
+  .guide-footer{font-size:15px}
+}
+
+
+/* 0.2.5: another +2px for descriptions and remote-control hints.
+   Slightly enlarge text boxes so long Russian descriptions do not clip. */
+.player-description{font-size:21px;max-height:165px}
+.player-stats{font-size:18px}
+.guide-selected-desc{font-size:20px;max-height:120px}
+.guide-selected{max-height:216px}
+.archive-program-desc{font-size:22px;max-height:98px}
+.channel-program{font-size:20px}
+.player-hint{font-size:18px}
+.sidebar-footer{font-size:19px}
+.sidebar.playback-group .sidebar-footer{font-size:18px}
+.guide-navhint{font-size:19px}
+.guide-footer{font-size:18px}
+.archive-footnote{font-size:19px}
+.archive-seek-status{font-size:21px}
+.helpbox{font-size:20px}
+/* Network counters have fixed-width figures to avoid jitter during live updates. */
+#playerNetRx,#playerNetTx{white-space:nowrap;font-variant-numeric:tabular-nums;color:#a8dfff}
+@media(max-width:1200px){
+  .channel-program{font-size:18px}
+  .archive-program-desc{font-size:19px;max-height:83px}
+  .sidebar-footer{font-size:17px}
+  .sidebar.playback-group .sidebar-footer{font-size:17px}
+  .player-hint{font-size:17px}
+  .guide-selected-desc{font-size:19px}
+  .guide-navhint{font-size:18px}
+  .guide-footer{font-size:17px}
+}
+
+
+/* 0.2.6: show the clock for every playback menu and add live programme progress. */
+#topline{z-index:10}
+#topline.clock-only{justify-content:flex-end;padding:18px 30px 14px;background:linear-gradient(rgba(0,0,0,.42),transparent)}
+#topline.clock-only .brand-mini{display:none}
+.player-timeline{margin:14px 0 12px}
+.player-progress-line{display:flex;align-items:center;font-variant-numeric:tabular-nums;white-space:nowrap;color:#dce8f3;font-size:18px}
+.player-progress-time{color:#eef6ff}
+.player-progress-track{position:relative;display:block;flex:1;height:7px;margin:0 18px;border-radius:999px;background:rgba(255,255,255,.28);overflow:hidden}
+.player-progress-fill{display:block;height:100%;width:0;border-radius:999px;background:#eef6ff;box-shadow:0 0 12px rgba(255,255,255,.35)}
+.player-progress-remaining{margin-left:18px;color:#eef6ff;font-weight:bold}
+@media(max-width:1200px){
+  .player-progress-line{font-size:16px}
+  .player-progress-track{margin:0 14px}
+  .player-progress-remaining{margin-left:14px}
+}
+
+/* 0.2.8: TV remote navigation, Yosso-style compact browser and schedule.       */
+/* Only simple Flexbox and positioned elements: compatible with webOS 4/Chromium 53. */
+.sidebar.quick-mode{width:610px;max-width:35vw;min-width:470px;background:linear-gradient(115deg,rgba(20,23,32,.94),rgba(25,28,39,.89));z-index:7}
+.sidebar.quick-mode .side-head,.sidebar.quick-mode .filter-controls,.sidebar.quick-mode #searchBox,.sidebar.quick-mode #groups{display:none!important}
+.sidebar.quick-mode .playlist-bar{font-size:25px;font-weight:bold;min-height:78px;padding:20px 29px;background:rgba(26,29,39,.84);color:#f6f8fc}
+.sidebar.quick-mode .reload-action{display:none!important}
+.sidebar.quick-mode .list{padding:4px 13px 20px;scrollbar-width:thin}
+.sidebar.quick-mode .channel-row{height:90px;min-height:90px}
+.sidebar.quick-mode .channel-item{height:90px;padding:10px 12px 12px;border-radius:9px;color:#f0f5fb}
+.sidebar.quick-mode .channel-item .channel-number{font-size:21px;width:28px;flex-shrink:0}
+.sidebar.quick-mode .channel-logo{height:62px;width:65px}
+.sidebar.quick-mode .channel-name{font-size:21px}
+.sidebar.quick-mode .channel-program{font-size:18px;color:#9bc8ee;margin-top:5px}
+.sidebar.quick-mode .channel-meter{display:block;height:4px;margin-top:7px;border-radius:3px;background:rgba(255,255,255,.26);overflow:hidden}
+.sidebar.quick-mode .channel-meter-fill{display:block;height:100%;min-width:0;background:#bedaf1}
+.sidebar.quick-mode .favorite-toggle{display:none!important}
+.sidebar.quick-mode .channel-signals{display:flex;align-items:center;flex-shrink:0;width:58px;justify-content:flex-end}
+.channel-signals{display:none}
+.channel-meter{display:none}
+.channel-playing-icon{font-size:21px;color:#36a6ff;margin-right:7px}
+.channel-archive-icon{font-size:24px;color:#b3bfca}
+.sidebar.quick-mode .channel-item.playing{background:rgba(39,74,101,.43)}
+.sidebar.quick-mode .channel-item:focus{background:rgba(200,220,235,.87);border-color:#e4f1ff;color:#101924}
+.sidebar.quick-mode .channel-item:focus .channel-program{color:#213e5b}
+.sidebar.quick-mode .channel-item:focus .channel-meter{background:rgba(32,53,75,.23)}
+.sidebar.quick-mode .channel-item:focus .channel-meter-fill{background:#294a67}
+.sidebar.quick-mode .sidebar-footer{font-size:16px;background:rgba(15,17,27,.65);color:#d2dbe5}
+.sidebar.quick-mode .sidebar-footer span:last-child{display:none}
+.sidebar.quick-group-offset{left:270px;max-width:33vw;min-width:445px;width:550px}
+.quick-group-panel{position:absolute;z-index:8;top:0;left:0;bottom:0;width:270px;background:rgba(20,23,30,.96);border-right:1px solid rgba(110,145,177,.45);display:flex;flex-direction:column}
+.quick-groups-title{padding:35px 20px 24px;font-size:22px;letter-spacing:.6px;font-weight:bold;border-bottom:1px solid #3b4b61}
+.quick-group-list{flex:1;overflow-y:auto;padding:10px 11px}
+.quick-group-item{display:block;width:100%;padding:14px 16px;border:1px solid transparent;border-radius:9px;background:transparent;text-align:left;color:#dfe8ef;font-size:19px;line-height:1.25}
+.quick-group-item.active{background:rgba(51,90,122,.50);color:#fff}
+.quick-group-item:focus{outline:2px solid #8bd1ff;background:#a8d1ec;color:#112030}
+.quick-groups-hint{border-top:1px solid #364a5f;padding:14px;color:#9db6cc;font-size:15px;line-height:1.35}
+/* All channel-guide layouts use the same three structural columns. */
+.guide-panel{overflow:hidden}
+.guide-body{display:flex;flex:1;min-height:0;overflow:hidden}
+.guide-list-column{display:flex;flex:1;flex-direction:column;min-width:0;overflow:hidden}
+.guide-body .guide-rows{overflow-y:auto;flex:1;min-height:0}
+.guide-dates{display:flex;flex-direction:column;flex:0 0 124px;overflow-y:auto;overflow-x:hidden;padding:9px 8px;background:rgba(15,23,35,.48);border-left:1px solid rgba(113,151,183,.25)}
+.guide-day{min-height:65px;width:100%;white-space:pre-line;background:transparent;color:#c6d8e8;border:1px solid transparent;border-radius:9px;text-align:center;font-size:16px;line-height:1.25;padding:8px 3px;flex-shrink:0}
+.guide-day.active{background:rgba(50,96,130,.45);color:#bfe2ff}
+.guide-day:focus{background:#d5ebfd;color:#102438;border:2px solid #72c4ff;outline:none}
+.guide-detail-column{width:30%;min-width:235px;border-left:1px solid rgba(113,151,183,.28);background:rgba(12,26,44,.34);padding:19px;overflow:auto}
+.guide-detail-column .guide-selected{background:rgba(17,36,57,.67);padding:23px 20px;border:1px solid rgba(82,125,165,.37);border-radius:13px;max-height:none;min-height:0;overflow:auto}
+.guide-detail-column .guide-selected-title{font-size:23px;line-height:1.3;white-space:normal;overflow:visible;text-overflow:clip}
+.guide-detail-column .guide-selected-desc{font-size:19px;line-height:1.4;max-height:none;overflow:visible;white-space:normal;margin-top:10px}
+.guide-panel .guide-head{flex-shrink:0}
+.guide-panel .guide-rows{padding-left:15px;padding-right:15px}
+.sidebar.quick-mode ~ .guide-panel:not(.playback-guide){left:630px;right:24px;top:38px;bottom:22px;z-index:6;background:linear-gradient(120deg,rgba(12,26,44,.85),rgba(9,18,33,.85))}
+.sidebar.quick-mode ~ .guide-panel .guide-list-column{min-width:220px}
+.guide-panel.playback-guide .guide-detail-column{width:30%}
+.guide-panel.playback-guide .guide-dates{flex-basis:140px}
+.guide-panel.playback-guide .guide-selected-title{font-size:28px}
+.guide-panel.playback-guide .guide-selected-desc{font-size:20px}
+/* OK menu with two prominent actions followed by recent channels. */
+.recent-panel{position:absolute;z-index:9;bottom:28px;left:38px;right:38px;border:1px solid rgba(96,157,204,.58);background:linear-gradient(120deg,rgba(10,23,38,.86),rgba(17,29,47,.89));border-radius:20px;padding:25px 29px 20px;box-shadow:0 12px 75px rgba(0,0,0,.62)}
+.recent-top{display:flex;align-items:center;min-height:96px}
+.recent-logo{height:82px;width:88px;object-fit:contain;background:rgba(31,51,70,.55);border-radius:10px;margin-right:22px}
+.recent-meta{flex:1;min-width:0}
+.recent-current-name{font-weight:bold;font-size:27px;margin-bottom:6px}
+.recent-current-program{font-size:22px;color:#ebf6ff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.recent-next-program{font-size:18px;color:#a7c7dc;margin-top:6px}
+.recent-clock{font-size:21px;color:#d6eafa;margin-left:15px}
+.recent-progress{height:5px;border-radius:4px;background:rgba(255,255,255,.25);overflow:hidden;margin:15px 0 18px}
+.recent-progress-fill{background:#58b9fd;height:100%;width:0;border-radius:4px}
+.recent-actions{display:flex;align-items:stretch;min-height:148px;overflow:hidden}
+.recent-card{display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;text-align:center;min-width:150px;max-width:150px;height:141px;margin-right:12px;background:rgba(48,60,78,.75);border:1px solid rgba(119,148,173,.32);border-radius:13px;color:#eff6ff;padding:11px;font-size:17px;line-height:1.2}
+.recent-card:focus{outline:3px solid #8ad4ff;background:rgba(66,123,167,.87);color:#fff}
+.recent-action-icon{font-size:42px;margin-bottom:14px;color:#f4fbff;line-height:1}
+.recent-action-card{min-width:175px;max-width:175px}
+.recent-channel-cards{display:flex;align-items:stretch;flex:1;min-width:0;overflow-x:auto;scrollbar-width:thin}
+.recent-channel-card img{max-height:60px;width:70px;object-fit:contain;margin-bottom:5px}
+.recent-channel-name{font-weight:bold;font-size:17px;white-space:nowrap;max-width:132px;overflow:hidden;text-overflow:ellipsis}
+.recent-channel-program{font-size:14px;color:#bbd5ea;max-width:132px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px}
+.recent-empty{display:block;padding:50px 20px;color:#9fb9cd;font-size:18px}
+.recent-hint{font-size:18px;color:#a0c0d8;margin-top:15px}
+/* Timeline grid, eight visible rows to keep the old webOS browser responsive. */
+.tv-grid{position:absolute;z-index:9;left:2%;right:2%;top:5%;bottom:5%;background:linear-gradient(110deg,rgba(9,20,36,.95),rgba(14,27,43,.94));border:1px solid #456987;border-radius:18px;padding:24px;display:flex;flex-direction:column;box-shadow:0 15px 70px rgba(0,0,0,.73);overflow:hidden}
+.tv-grid-header{display:flex;align-items:center;justify-content:space-between;min-height:55px;padding:0 0 12px;border-bottom:1px solid #34526b;font-size:24px}
+.tv-grid-header span{font-size:17px;font-weight:normal;color:#98bedc}
+.tv-grid-times{display:flex;align-items:stretch;min-height:53px;border-bottom:1px solid #30465d}
+.tv-grid-label-col{width:300px;flex-shrink:0;font-size:18px;padding:15px;color:#9bbedb}
+.tv-grid-ticks{flex:1;position:relative}
+.tv-grid-tick{position:absolute;top:17px;font-size:17px;color:#bdd0df;transform:translateX(-40%)}
+.tv-grid-rows{flex:1;display:flex;flex-direction:column;min-height:0;padding:5px 0}
+.tv-grid-row{display:flex;flex:1;min-height:61px;border-bottom:1px solid rgba(72,104,135,.32)}
+.tv-grid-row.selected .tv-grid-channel{background:rgba(25,87,131,.62);color:white}
+.tv-grid-channel{width:300px;flex-shrink:0;display:flex;align-items:center;padding:7px 10px;color:#d2e7f8;font-size:18px;min-width:0}
+.tv-grid-channel img{width:51px;height:42px;object-fit:contain;flex-shrink:0;margin-right:13px}
+.tv-grid-channel-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.tv-grid-live{font-size:21px;color:#55bfff;margin-left:8px}
+.tv-grid-strip{flex:1;position:relative;background:rgba(33,50,68,.28);min-width:0}
+.tv-grid-program{position:absolute;top:6px;bottom:6px;background:rgba(54,71,91,.66);border:1px solid rgba(145,168,190,.28);border-radius:8px;padding:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:17px;color:#dfeaf4}
+.tv-grid-program.picked{background:rgba(113,176,219,.79);border-color:#8bd2ff;color:#071827;font-weight:bold}
+.tv-grid-playhead{position:absolute;top:0;bottom:0;width:2px;background:#60baff;pointer-events:none}
+.tv-grid-empty{font-size:16px;color:#708ea9;padding:17px;display:block}
+.tv-grid-details{flex-shrink:0;min-height:88px;max-height:145px;overflow:hidden;padding:17px 20px;background:rgba(31,52,73,.67);border-radius:12px;margin-top:14px;color:#dfefff;font-size:19px;line-height:1.4}
+@media(max-width:1200px){
+  .sidebar.quick-mode{width:43vw;min-width:380px}.sidebar.quick-group-offset{left:240px;width:43vw}
+  .quick-group-panel{width:240px}.sidebar.quick-mode ~ .guide-panel:not(.playback-guide){left:44vw;right:8px}
+  .guide-dates{flex-basis:93px}.guide-detail-column{min-width:178px;width:30%;padding:9px}
+  .guide-detail-column .guide-selected{padding:10px}.guide-detail-column .guide-selected-desc{font-size:16px}
+  .recent-card{min-width:123px;max-width:123px}.recent-action-card{min-width:145px;max-width:145px}
+  .tv-grid-label-col,.tv-grid-channel{width:225px}
+}
+
+/* Specificity override for the earlier 0.2.3 dark focus rule. */
+.sidebar.open.playing-overlay.quick-mode .channel-item:focus{
+  background:rgba(220,231,242,.97);border-color:#eaf5ff;color:#102236;
+}
+.sidebar.open.playing-overlay.quick-mode .channel-item:focus .channel-program{color:#385d79}
+.sidebar.open.playing-overlay.quick-mode .channel-item:focus .channel-name{color:#102236}
+.sidebar.quick-mode .channel-archive-icon{display:inline-flex;align-items:center;justify-content:center;width:23px;height:25px}
+.sidebar.quick-mode .channel-archive-icon svg{width:22px;height:22px;fill:none;stroke:#c6d3df;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.sidebar.open.playing-overlay.quick-mode .channel-item:focus .channel-archive-icon svg{stroke:#395a76}
+
+
+/* 0.2.9: third LEFT level (actions), guide group selection, live-now archive panel. */
+.quick-actions-panel{z-index:10;background:rgba(17,29,44,.965)}
+.quick-actions-panel .quick-group-item{margin-bottom:4px;padding-top:17px;padding-bottom:17px}
+.tv-grid-groups{position:absolute;z-index:12;top:7%;bottom:7%;left:2%;width:360px;max-width:36vw;display:flex;flex-direction:column;background:rgba(18,31,47,.965);border:1px solid #537d9f;border-radius:15px;overflow:hidden;box-shadow:20px 8px 70px rgba(0,0,0,.70)}
+.tv-grid-groups .quick-group-list{flex:1;overflow-y:auto}
+.tv-grid-groups .quick-group-item{font-size:20px}
+.archive-live-panel{position:absolute;z-index:12;bottom:4%;left:5%;right:5%;max-width:1600px;margin:0 auto;border:1px solid rgba(97,170,224,.76);border-radius:20px;padding:28px 36px 23px;overflow:hidden;background:linear-gradient(110deg,rgba(7,24,43,.79),rgba(15,31,50,.77));box-shadow:0 15px 70px rgba(0,0,0,.63);color:#f3faff}
+.archive-live-heading{font-size:18px;font-weight:bold;letter-spacing:2px;color:#aed8f4}
+.archive-live-badge{display:inline-block;background:#bd3445;border-radius:6px;padding:6px 10px;margin-right:12px;color:#fff;letter-spacing:.5px}
+.archive-live-channel{display:flex;align-items:center;margin:18px 0 15px}
+.archive-live-channel img{width:82px;height:74px;object-fit:contain;flex-shrink:0;border-radius:10px;background:rgba(46,70,97,.4);margin-right:21px}
+.archive-live-name{font-size:30px;font-weight:bold}
+.archive-live-group{font-size:17px;color:#a2bed5;margin-top:6px}
+.archive-live-program{font-size:29px;font-weight:bold;line-height:1.2;margin:10px 0}
+.archive-live-time{font-size:20px;color:#afcde7}
+.archive-live-rail{height:8px;background:rgba(255,255,255,.25);border-radius:7px;overflow:hidden;margin:15px 0}
+.archive-live-fill{height:100%;width:0;background:#58bafa;border-radius:7px}
+.archive-live-next{font-size:20px;color:#bbd9f0;margin:12px 0 9px}
+.archive-live-description{font-size:20px;color:#d0deeb;line-height:1.4;max-height:116px;overflow:hidden}
+.archive-live-actions{display:flex;margin-top:20px;align-items:center}
+.archive-live-go{min-width:300px;font-size:23px;font-weight:bold;background:#1f709e;border:1px solid #6bc3f4;border-radius:11px;padding:18px 22px;color:#fff}
+.archive-live-go:focus{background:#327ead;outline:3px solid #9bdcff}
+.archive-live-hint{font-size:17px;color:#9bc0d9;margin-top:15px}
+@media(max-width:1200px){.tv-grid-groups{max-width:40vw;width:300px}.archive-live-panel{padding:18px 23px}.archive-live-name{font-size:24px}.archive-live-program{font-size:24px}.archive-live-description{font-size:17px}}
+/* In the compact channel browser, search is deliberately visible only when
+   selected from the third LEFT actions menu. Overrides the 0.2.8 hide rule. */
+.sidebar.quick-mode #searchBox:not(.hidden){display:flex!important;padding:12px 18px 16px}
+.sidebar.quick-mode #searchBox input{font-size:21px}
+
+
+/* 0.3.0: settings categories, separate profile management, remote-friendly typography controls. */
+.settings-tabs{display:flex;margin:4px 0 20px;border-bottom:1px solid #37526d;padding-bottom:13px}
+.settings-tab{display:inline-block;min-width:180px;margin-right:14px;padding:13px 19px;border-radius:10px;background:#263c55;color:#b4cce4;border:1px solid #54718d;font-size:21px}
+.settings-tab.selected{background:#2375bc;color:white;border-color:#75c2ff}
+.settings-section{display:block}.settings-section.hidden{display:none!important}
+.section-heading{font-size:25px;font-weight:bold;color:#f2f8ff;margin:13px 0 12px}
+.playlist-profiles{max-height:240px;overflow:auto;border:1px solid #375672;border-radius:11px;padding:6px;background:rgba(4,17,31,.60)}
+.profile-item{display:block;width:100%;text-align:left;border:1px solid transparent;border-radius:9px;background:rgba(32,50,69,.50);color:#d1e3f4;padding:12px 16px;margin-bottom:5px}
+.profile-item.current{border-color:#4b9bd5;background:rgba(26,86,138,.50)}
+.profile-item:focus{outline:3px solid #77c9ff;background:#2c659b;color:white}
+.profile-name{display:block;font-size:20px;font-weight:bold;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profile-info{display:block;font-size:15px;margin-top:4px;color:#a9c4da}
+.profile-actions{display:flex;margin:12px 0}.profile-actions .btn{font-size:18px;margin-right:10px;padding:11px 16px}
+.btn-danger{background:#603342;border-color:#ac5b6e}.profile-note{font-size:16px;line-height:1.4;color:#b3cfe6;margin:5px 0 20px}
+.font-note{font-size:19px;color:#9ebad3;line-height:1.4}
+.font-control-row{display:flex;align-items:center;justify-content:space-between;min-height:71px;padding:13px 3px;border-bottom:1px solid #2a4056}
+.font-control-name{font-size:21px;color:#dfeeff}.font-control-buttons{display:flex;align-items:center}
+.font-adjust{font-size:27px;min-width:55px;height:46px;border-radius:9px;background:#284c70;border:1px solid #4f89b5}
+.font-control-value{min-width:82px;text-align:center;font-size:20px;color:#8fcafb}
+#resetFonts{margin-top:22px;font-size:19px}
+.archive-buttons{flex-wrap:wrap}
+.archive-action{min-width:195px}
+@media(max-width:1200px){.settings-tab{min-width:130px}.font-control-name{font-size:18px}.profile-name{font-size:18px}.archive-action{min-width:160px}}
+/* User-customisable font sizes, compatible with Chromium 53. */
+.channel-name,.sidebar.quick-mode .channel-name{font-size:var(--ptv-font-channel,22px)}
+.channel-program,.sidebar.quick-mode .channel-program{font-size:var(--ptv-font-program,20px)}
+.guide-row .guide-program,.tv-grid-program,.recent-current-program{font-size:var(--ptv-font-guide,20px)}
+.player-description,.guide-selected-desc,.archive-program-desc,.archive-live-description{font-size:var(--ptv-font-description,21px)}
+.player-hint,.sidebar-footer,.guide-navhint,.guide-footer,.archive-footnote,.recent-hint,.quick-groups-hint,.helpbox{font-size:var(--ptv-font-hints,18px)}
+.quick-group-item,.group-item,.filter-controls .mode,.recent-card,.settings-tab{font-size:var(--ptv-font-menus,19px)}
+.player-name,.recent-current-name{font-size:var(--ptv-font-title,36px)}
+
+
+/* 0.3.1: light 3/5-item zap carousel above the existing channel-information OSD.
+   No new images or libraries, only cached channel logos; Chromium 53 safe. */
+.zap-carousel{margin:-5px 0 21px;min-height:116px}
+.zap-carousel-heading{display:flex;align-items:center;justify-content:space-between;margin:0 2px 11px;color:#91bde2;letter-spacing:1.5px;font-size:14px;font-weight:bold}
+.zap-carousel-heading small{font-size:14px;font-weight:normal;letter-spacing:0;color:#9cbcd4}
+.zap-carousel-items{display:flex;align-items:stretch;width:100%;overflow:hidden}
+.zap-channel-card{display:flex;align-items:center;flex:1;min-width:0;min-height:91px;margin:0 5px;padding:12px 13px;border-radius:12px;border:1px solid rgba(90,126,158,.35);background:rgba(19,39,61,.69);color:#bbd3e9;overflow:hidden}
+.zap-channel-card.is-current{background:rgba(36,105,159,.80);border:2px solid #79cdff;color:white;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.zap-channel-logo{width:53px;height:58px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:9px;background:rgba(11,25,40,.55);font-size:18px;color:#b7d7f2}
+.zap-channel-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.zap-channel-text{flex:1;min-width:0;margin-left:11px}
+.zap-channel-title{display:block;font-size:18px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#e9f6ff;font-weight:bold}
+.zap-channel-program{display:block;margin-top:6px;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#aac8e3}
+.zap-channel-card.is-current .zap-channel-program{color:#e4f1ff}
+.zap-current-icon{margin-left:7px;font-size:20px;color:#fff}
+.player-info.zapping{max-height:78vh}
+@media(max-width:1200px){
+  .zap-carousel{margin-bottom:15px;min-height:94px}
+  .zap-channel-card{min-height:78px;padding:8px;margin:0 3px}
+  .zap-channel-logo{width:42px;height:47px}
+  .zap-channel-title{font-size:15px}
+  .zap-channel-program{font-size:13px}
+  .zap-carousel-heading{font-size:12px}
+}
+
+
+/* 0.3.2: stable channel-zap panel and a live per-control font sample.
+   For the older Chromium 53 engine avoid min(), modern CSS grid, and
+   dependence on line-clamp support. No changes to the native video layer. */
+.player-info.zapping{
+  height:57vh;
+  max-height:none;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.player-info.zapping .zap-carousel{
+  flex:0 0 auto;
+  margin:-5px 0 17px;
+  min-height:116px;
+  height:116px;
+}
+.player-info.zapping .zap-carousel-items{height:91px}
+.player-info.zapping .zap-channel-card{
+  height:91px;
+  min-height:91px;
+  max-height:91px;
+  flex:1 1 0;
+}
+.player-info.zapping .player-head{
+  min-height:63px;
+  max-height:85px;
+  flex:0 0 auto;
+  overflow:hidden;
+}
+.player-info.zapping .player-title-group{min-width:0;overflow:hidden}
+.player-info.zapping .player-group{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-info.zapping .player-line{flex:0 0 auto;min-height:25px;max-height:38px;overflow:hidden}
+.player-info.zapping .player-epg{
+  display:block;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  padding:0;
+}
+.player-info.zapping .player-description{
+  flex:1 1 auto;
+  min-height:0;
+  max-height:none;
+  overflow:hidden;
+  margin-top:8px;
+  margin-bottom:7px;
+  line-height:1.4;
+  white-space:normal;
+}
+.player-info.zapping .player-timeline{flex:0 0 auto;margin:7px 0 12px}
+.player-info.zapping .player-stats{flex:0 0 auto}
+.player-info.zapping .player-hint{flex:0 0 auto;max-height:3em;overflow:hidden}
+/* Full programme text is restored by Down: the zapping class is removed. */
+.player-info:not(.zapping){max-height:83vh;overflow-y:auto;pointer-events:auto}
+.player-info:not(.zapping) .player-description{max-height:none;overflow:visible;white-space:pre-line}
+
+.font-control-row{flex-wrap:wrap}
+.font-control-row.has-preview{background:rgba(36,79,112,.28);border-radius:9px}
+.font-row-preview{
+  display:none;
+  flex:0 0 100%;
+  min-width:0;
+  margin:10px 2px 3px;
+  padding:11px 15px 13px;
+  border:1px solid rgba(98,159,200,.42);
+  border-radius:10px;
+  background:rgba(5,20,34,.78);
+  overflow:hidden;
+}
+.font-control-row.has-preview .font-row-preview{display:block}
+.font-row-preview-caption{display:block;font-size:13px;letter-spacing:1px;color:#83b9e0;margin-bottom:7px}
+.font-row-sample{display:block;line-height:1.35;white-space:normal;color:#e4f2ff;overflow-wrap:break-word}
+.font-sample-channel,.font-sample-title{font-weight:bold;color:#fff}
+.font-sample-program,.font-sample-guide{color:#a8c9e6}
+.font-sample-description{color:#b3c9dd;line-height:1.45}
+.font-sample-hints{color:#8db3d3}
+.font-sample-menus{color:#dfeeff}
+@media(max-width:1200px){
+  .player-info.zapping{height:64vh}
+  .player-info.zapping .zap-carousel{height:95px;min-height:95px}
+  .player-info.zapping .zap-carousel-items{height:78px}
+  .player-info.zapping .zap-channel-card{height:78px;min-height:78px;max-height:78px}
+  .player-info.zapping .player-head{min-height:51px;max-height:68px}
+}
+
+/* 0.3.2 layout QA: reserve exactly two readable lines of EPG in zap mode.
+   Compact vertical gaps prevent the preview from colliding with the progress
+   bar on the LG's 1650x920 screenshot/viewport. */
+.player-info.zapping{height:59vh;padding-top:18px;padding-bottom:18px}
+.player-info.zapping .zap-carousel{margin-bottom:10px}
+.player-info.zapping .player-head{margin-bottom:8px;min-height:57px;max-height:72px}
+.player-info.zapping .player-line{margin:5px 0;min-height:24px;max-height:32px}
+.player-info.zapping .player-description{
+  flex:0 0 auto;
+  height:2.85em;
+  min-height:2.85em;
+  max-height:2.85em;
+  line-height:1.4;
+  margin-top:5px;
+  margin-bottom:8px;
+  overflow:hidden;
+}
+.player-info.zapping .player-timeline{margin-top:auto;margin-bottom:9px}
+.player-info.zapping .player-stats{padding-top:10px}
+.player-info.zapping .player-hint{padding-top:8px;margin-top:8px}
+@media(max-width:1200px){
+  .player-info.zapping{height:65vh;padding-top:14px;padding-bottom:14px}
+  .player-info.zapping .zap-carousel{margin-bottom:8px}
+  .player-info.zapping .player-head{min-height:49px;max-height:61px;margin-bottom:6px}
+  .player-info.zapping .player-line{margin:4px 0;min-height:21px;max-height:29px}
+  .player-info.zapping .player-hint{padding-top:6px;margin-top:6px}
+}
+
+
+/* 0.3.3 · Graphite/white Photoshop-inspired menus. No external fonts, JS
+   libraries, or costly full-screen blur filters are loaded on LG webOS 4.9. */
+html,body{font-family:"LG Smart UI","Segoe UI",Arial,sans-serif;color:#f2f2f3}
+#app{background:#08090b}
+.sidebar.open.playing-overlay,.sidebar.quick-mode{
+  background:linear-gradient(100deg,rgba(20,20,22,.86),rgba(26,26,28,.77));
+  box-shadow:12px 0 55px rgba(0,0,0,.35);border-right:1px solid rgba(220,220,220,.12);
+}
+.sidebar.quick-mode .playlist-bar{background:rgba(40,40,42,.70);color:#f2f2f2}
+.sidebar.quick-mode .channel-name{font-weight:500;letter-spacing:.05px}
+.sidebar.quick-mode .channel-program{color:#c4c4c8}
+.sidebar.quick-mode .channel-item{border-radius:8px}
+.sidebar.quick-mode .channel-item.playing{background:rgba(84,84,87,.25)}
+.sidebar.quick-mode .channel-item:focus,.sidebar.quick-mode .channel-item:hover{
+  background:rgba(245,245,247,.92);border-color:transparent;outline:2px solid #f4f4f6;outline-offset:-2px;color:#18191d;
+}
+.sidebar.quick-mode .channel-item:focus .channel-program,.sidebar.quick-mode .channel-item:hover .channel-program{color:#35363b}
+.sidebar.quick-mode .channel-item:focus .channel-meter-fill{background:#575b64}
+.sidebar.quick-mode .channel-meter-fill{background:#d9dce0}
+.sidebar.quick-mode .channel-archive-icon svg{stroke:#dedfe2}
+.sidebar.quick-mode .channel-item:focus .channel-archive-icon svg{stroke:#30333a}
+.sidebar.quick-mode .channel-playing-icon{color:#e5e6ea}
+.sidebar.quick-mode .sidebar-footer{background:rgba(14,14,15,.62);border-color:rgba(255,255,255,.11)}
+/* Seamless marquees run only for text wider than its visible line, measured in JS. */
+.sidebar.quick-mode .channel-program.ptv-marquee{overflow:hidden;text-overflow:clip}
+.ptv-marquee-track{display:inline-flex;white-space:nowrap;max-width:none;animation:ptv-marquee 13s linear infinite;will-change:transform}
+.ptv-marquee-copy{display:inline-block;flex-shrink:0;padding-right:65px;white-space:nowrap}
+@keyframes ptv-marquee{0%,9%{transform:translateX(0)}86%,100%{transform:translateX(-50%)}}
+.quick-group-panel{background:rgba(28,28,30,.89);border-right:1px solid rgba(255,255,255,.10)}
+.quick-groups-title{color:#e4e4e6;border-bottom:1px solid rgba(255,255,255,.15);font-weight:500}
+.quick-group-item{color:#dddde0;border:0}
+.quick-group-item.active{background:rgba(127,128,131,.29)}
+.quick-group-item:focus{background:#eeeef0;color:#161719;outline:0}
+.quick-groups-hint{border-color:rgba(255,255,255,.13);color:#aaaab1}
+.guide-panel,.guide-panel.playback-guide,
+.sidebar.quick-mode ~ .guide-panel:not(.playback-guide){
+  background:rgba(28,29,31,.78);border:1px solid rgba(255,255,255,.12);border-radius:21px;
+  box-shadow:0 18px 75px rgba(0,0,0,.30);color:#eeeef0;
+}
+.guide-panel.playback-guide{left:5vw;right:5vw;top:4vh;bottom:4vh}
+.guide-panel .guide-head{background:rgba(21,21,23,.55);border-color:rgba(255,255,255,.10);padding:20px 30px 13px}
+.guide-label{color:#aaaab0;font-weight:600;letter-spacing:1.5px}
+.guide-channel h2{font-weight:600;letter-spacing:.2px}
+.guide-range{color:#b6b6bb;font-size:17px}
+.guide-panel.playback-guide .guide-dates{order:-1;border-right:1px solid rgba(255,255,255,.10);border-left:0;flex-basis:146px}
+.guide-panel.playback-guide .guide-list-column{order:0}
+.guide-panel.playback-guide .guide-detail-column{order:1}
+.guide-body .guide-dates{background:rgba(21,21,23,.25);border-color:rgba(255,255,255,.12)}
+.guide-day{color:#d4d4d7;font-size:var(--ptv-font-guide,20px);line-height:1.18;min-height:76px}
+.guide-day.active{background:rgba(99,99,103,.40);color:#f6f6f8}
+.guide-day:focus,.guide-day:hover{background:#ededf0;color:#161719;outline:2px solid #fff;border-color:transparent}
+.guide-row{align-items:center;min-height:64px;color:#eeeef0;border:1px solid transparent;border-radius:7px}
+.guide-row .guide-time{color:#d0d0d4;font-size:var(--ptv-font-guide,20px);flex-basis:110px;font-variant-numeric:tabular-nums}
+.guide-date{color:#bcbcc0;font-size:var(--ptv-font-guide,20px);font-weight:500}
+.guide-row .guide-program{font-size:var(--ptv-font-guide,20px);font-weight:400}
+.guide-row.guide-past .guide-program{color:#b7b7bc}
+.guide-row.guide-onair{background:rgba(170,170,174,.18);border-color:transparent}
+.guide-row:focus,.guide-row:hover{background:#efeff1;color:#111216;outline:2px solid #fff;border-color:transparent}
+.guide-row:focus .guide-program,.guide-row:hover .guide-program,.guide-row:focus .guide-time{color:#151619}
+.guide-row.archive-available .guide-time:before{color:#cacace}
+.guide-row:focus.archive-available .guide-time:before{color:#292a2f}
+.guide-detail-column{background:rgba(16,16,17,.19);border-color:rgba(255,255,255,.12);padding:17px}
+.guide-detail-column .guide-selected{background:rgba(46,46,49,.72);border:0;border-radius:12px}
+.guide-selected-time{color:#bbbbbf;font-size:var(--ptv-font-guide,20px)}
+.guide-selected-title{font-weight:600}
+.guide-detail-column .guide-selected-desc{color:#d5d5d8}
+.guide-navhint,.guide-footer{color:#c1c1c6;border-color:rgba(255,255,255,.09)}
+.guide-panel .guide-rows{scrollbar-color:#7a7a80 rgba(0,0,0,.24)}
+.tv-grid{background:rgba(24,24,26,.88);border-color:rgba(255,255,255,.2)}
+.tv-grid-program{background:rgba(73,73,77,.75);border-color:rgba(230,230,230,.20)}
+.tv-grid-program.picked{background:#e7e7ec;border-color:#fff;color:#101114}
+.tv-grid-row.selected .tv-grid-channel{background:rgba(180,180,184,.26)}
+.tv-grid-playhead{background:#e5e5e7}
+.tv-grid-tick{font-size:var(--ptv-font-guide,20px)}
+.recent-panel{background:rgba(24,24,26,.85);border:1px solid rgba(255,255,255,.15)}
+.recent-card{background:rgba(74,74,78,.7);border-color:rgba(255,255,255,.15)}
+.recent-card:focus{background:#efeff2;outline:2px solid #fff;color:#1a1b1d}
+.recent-progress-fill{background:#d6d6da}
+/* Compact player while channel surfing: do not allocate the old ~59vh. */
+.player-info,.player-info:not(.zapping){background:linear-gradient(0deg,rgba(6,6,7,.93),rgba(12,12,13,.76));border:0;border-radius:16px;box-shadow:0 20px 70px rgba(0,0,0,.15)}
+.player-info.zapping{height:34vh;min-height:305px;max-height:40vh;padding:13px 27px 12px;
+  background:linear-gradient(0deg,rgba(9,9,11,.92),rgba(22,22,24,.76));}
+.player-info.zapping .zap-carousel{height:91px;min-height:91px;margin:0 0 10px}
+.player-info.zapping .zap-carousel-heading{display:none}
+.player-info.zapping .zap-carousel-items{height:89px}
+.player-info.zapping .zap-channel-card{height:87px;min-height:87px;max-height:87px;
+  background:rgba(54,54,57,.62);border:1px solid rgba(200,200,200,.18);border-radius:10px}
+.player-info.zapping .zap-channel-card.is-current{background:rgba(89,89,94,.75);border:2px solid #e8e8eb;box-shadow:none}
+.player-info.zapping .zap-channel-title{color:#f6f6f6}
+.player-info.zapping .zap-channel-program{color:#d2d2d7}
+.player-info.zapping .player-head{min-height:52px;max-height:64px;margin:0 0 4px}
+.player-info.zapping .player-logo{width:70px;height:56px;margin-right:14px;background:rgba(255,255,255,.07)}
+.player-info.zapping .player-name{font-weight:600}
+.player-info.zapping .player-group{margin-top:0}
+.player-info.zapping .player-line{min-height:21px;max-height:27px;margin:3px 0}
+.player-info.zapping .player-label{width:75px;flex-basis:75px;font-weight:normal;color:#bdbdc1}
+.player-info.zapping .player-epg{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:19px}
+.player-info.zapping .player-description,.player-info.zapping .player-stats,.player-info.zapping .player-hint{display:none}
+.player-info.zapping .player-timeline{flex:0 0 auto;margin:auto 0 4px}
+.player-info.zapping .player-progress-line{font-size:17px}
+.player-info.zapping .player-progress-track{background:rgba(255,255,255,.22)}
+.player-progress-fill{background:#e7e7e9}
+.player-stats{border-color:rgba(255,255,255,.12)}
+.player-hint{border-color:rgba(255,255,255,.10);color:#bebec3}
+.player-label{color:#c7c7ca}
+.player-group{color:#b4b4bb}
+.player-epg{color:#f3f3f4}
+.player-description{color:#d1d1d5}
+.player-logo{background:rgba(255,255,255,.09)}
+.live-tag{background:#c43a42;border-color:#d74c54;border-radius:7px}
+.archive-controls{background:rgba(27,27,29,.91);border-color:rgba(255,255,255,.13)}
+.archive-action{background:rgba(82,82,85,.78);border-color:rgba(255,255,255,.24)}
+.archive-action:focus{background:#eeeef0;color:#151515;outline-color:#fff}
+/* Font editing shows a full screen sample BEHIND the semitransparent settings. */
+.font-scene{position:absolute;left:0;top:0;right:0;bottom:0;z-index:18;overflow:hidden;pointer-events:none;
+  background:linear-gradient(135deg,rgba(21,21,23,.94),rgba(9,9,11,.91));color:#f3f3f4}
+.font-scene .scene-watermark{position:absolute;right:34px;top:24px;color:#a8a8ad;font-size:16px;letter-spacing:1.4px}
+.modal{background:rgba(1,2,4,.16)}
+.modal-panel{background:rgba(29,30,32,.64);border:1px solid rgba(240,240,242,.26);box-shadow:0 25px 90px rgba(0,0,0,.53)}
+.modal-top h2{font-weight:600}
+.settings-tab{background:rgba(94,94,97,.52);border-color:rgba(255,255,255,.22)}
+.settings-tab.selected{background:#e9e9ec;border-color:#fff;color:#18191c}
+.font-control-row.has-preview{background:rgba(113,113,116,.18)}
+.font-adjust{background:rgba(106,106,110,.55);border-color:rgba(255,255,255,.27)}
+.font-adjust:focus{background:#f0f0f1;color:#141416;outline-color:#fff}
+.font-control-value{color:#e7e7ea}
+.font-row-preview{background:rgba(14,14,16,.62);border-color:rgba(255,255,255,.20)}
+.font-row-preview-caption{color:#b6b6bd}
+.section-heading{color:#f2f2f2}
+/* Sample for list, epg and player metadata uses the same CSS font variables. */
+.font-scene .scene-large-heading{font-size:24px;font-weight:600;letter-spacing:1px;margin-bottom:20px}
+.scene-browser{position:absolute;top:10%;bottom:5%;left:3%;right:3%;display:flex}
+.scene-browser-groups{width:24%;padding:20px 24px;background:rgba(46,46,48,.43)}
+.scene-browser-list{width:42%;padding:20px 25px;background:rgba(34,34,36,.48)}
+.scene-group-item{font-size:var(--ptv-font-menus,19px);line-height:1.4;padding:15px 18px;margin:4px 0;color:#dadadc;white-space:nowrap}
+.scene-group-item.active{background:#f1f1f2;color:#151517;border-radius:7px}
+.scene-browser-channel{display:flex;align-items:center;min-height:84px;padding:9px 13px;border-radius:8px}
+.scene-browser-channel.active{background:#f1f1f3;color:#171719}
+.scene-channel-logo{display:flex;align-items:center;justify-content:center;width:61px;height:61px;flex-shrink:0;background:rgba(93,93,97,.46);border-radius:9px;color:#eee;margin-right:17px;font-size:27px}
+.scene-channel-logo img{max-height:100%;max-width:100%;object-fit:contain}
+.scene-browser-channel-meta{min-width:0;overflow:hidden}
+.scene-channel-name{font-size:var(--ptv-font-channel,22px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.scene-channel-program{font-size:var(--ptv-font-program,20px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#c4c4ca;margin-top:5px}
+.scene-browser-channel.active .scene-channel-program{color:#55555a}
+.scene-epg-panel{position:absolute;left:4%;right:4%;top:7%;bottom:6%;background:rgba(42,42,45,.63);border-radius:20px;padding:24px;display:flex;flex-direction:column}
+.scene-epg-head{padding:7px 13px 22px;border-bottom:1px solid rgba(255,255,255,.15)}
+.scene-epg-channel-name{font-size:var(--ptv-font-title,36px);font-weight:600}
+.scene-epg-main{display:flex;flex:1;min-height:0}
+.scene-epg-dates{width:17%;background:rgba(16,16,18,.35);padding:12px}
+.scene-epg-day{font-size:var(--ptv-font-guide,20px);white-space:pre-line;text-align:center;line-height:1.22;padding:17px 7px}
+.scene-epg-day.active{background:#eaeaec;color:#151516;border-radius:8px}
+.scene-epg-list{width:52%;padding:12px}
+.scene-epg-row{font-size:var(--ptv-font-guide,20px);padding:17px 14px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.scene-epg-row.active{background:#eaeaec;color:#151516;border-radius:8px}
+.scene-epg-details{flex:1;min-width:0;padding:23px;background:rgba(25,25,27,.47)}
+.scene-date-label{font-size:var(--ptv-font-guide,20px);color:#d4d4d8}
+.scene-epg-detail-title{font-size:calc(var(--ptv-font-guide,20px) + 5px);margin:15px 0;font-weight:600}
+.scene-epg-description{font-size:var(--ptv-font-description,21px);color:#d7d7da;line-height:1.45}
+.scene-info-panel{position:absolute;left:5%;right:5%;bottom:7%;padding:38px 42px;background:rgba(25,25,27,.80);border-radius:16px}
+.scene-info-top{display:flex;align-items:center;margin-bottom:13px}
+.scene-info-heading{min-width:0}
+.scene-big-title{font-size:var(--ptv-font-title,36px);font-weight:600;line-height:1.25;margin:7px 0}
+.scene-info-program{font-size:var(--ptv-font-program,20px);margin:10px 0;color:#dfdfe2}
+.scene-info-description{font-size:var(--ptv-font-description,21px);color:#c8c8cd;margin-top:20px}
+.scene-info-hint{font-size:var(--ptv-font-hints,18px);margin-top:26px;border-top:1px solid rgba(255,255,255,.18);padding-top:15px;color:#b8b8be}
+@media(max-width:1200px){
+  .player-info.zapping{height:39vh;min-height:267px;max-height:45vh;padding:10px 15px}
+  .player-info.zapping .zap-carousel{height:79px;min-height:79px}
+  .player-info.zapping .zap-carousel-items{height:77px}
+  .player-info.zapping .zap-channel-card{height:75px;min-height:75px;max-height:75px}
+  .player-info.zapping .player-name{font-size:25px}
+  .player-info.zapping .player-head{min-height:45px;max-height:53px}
+  .player-info.zapping .player-logo{width:55px;height:45px}
+  .player-info.zapping .player-line{min-height:19px;max-height:25px}
+  .guide-panel.playback-guide{left:2vw;right:2vw;top:2vh;bottom:2vh}
+  .guide-panel.playback-guide .guide-dates{flex-basis:115px}
+  .guide-day{min-height:65px}
+  .scene-browser{left:0;right:0}.scene-browser-groups{padding:14px;width:26%}
+  .scene-browser-list{width:48%;padding:13px}.scene-epg-details{padding:14px}
+}
+
+/* Remaining regular menus use the same graphite design; selected items stay readable. */
+.sidebar.open:not(.quick-mode){background:linear-gradient(115deg,rgba(23,23,25,.91),rgba(27,27,29,.84));border-color:rgba(255,255,255,.15)}
+.filter-controls .mode,.labeled-btn,.btn,.text-btn{background:rgba(78,78,82,.73);border-color:rgba(255,255,255,.20);color:#f0f0f2}
+.filter-controls .mode.active{background:#e9e9eb;color:#111214;border-color:#fff}
+.btn-primary{background:rgba(115,115,121,.85);color:#fff;border-color:rgba(255,255,255,.32)}
+.btn:focus,.labeled-btn:focus,.filter-controls .mode:focus{background:#ededf0;color:#111214;outline-color:#f7f7f8}
+.channel-item:focus{background:#e9e9ed!important;border-color:#fff!important;color:#171719!important}
+.channel-item:focus .channel-program{color:#44454a}
+.channel-item:focus .channel-number{color:#54545a}
+.channel-item:focus .channel-name{color:#171719}
+.group-item.active,.group-item:focus{background:#ededf0;color:#141517;border-color:#fff}
+.channel-program{color:#c4c4cb}
+.channel-meter-fill{background:#ededee}
+.sidebar-footer{border-color:rgba(255,255,255,.15);color:#b8b8bf}
+.profile-item.current{background:rgba(137,137,141,.28);border-color:rgba(255,255,255,.32)}
+.profile-item:focus{background:#ededf0;color:#151617;outline-color:#fff}
+
+/* Place font controls beside the fullscreen example, not directly on top of it.
+   The example remains full-screen and updates on every change. */
+.modal.fonts-preview{justify-content:flex-end;padding-right:3.5vw}
+.modal.fonts-preview .modal-panel{width:755px;max-width:55vw;background:rgba(29,30,32,.78)}
+@media(max-width:1200px){
+  .modal.fonts-preview{justify-content:center;padding:16px}
+  .modal.fonts-preview .modal-panel{max-width:88vw;width:770px;background:rgba(29,30,32,.78)}
+}
+
+
+/* 0.3.4 — readable, user-adjustable type in both player overlays.
+   Use classic flexbox and fixed box sizes for Chromium 53 on LG webOS 4.9.
+   Keep both panel positions stable while changing channels. */
+.player-hero{display:block}
+.player-programs{display:block;min-width:0}
+/* Full channel-information panel: scale channel, EPG labels, programme texts. */
+.player-info:not(.zapping) .player-name{font-size:var(--ptv-font-title,36px)}
+.player-info:not(.zapping) .player-line .player-epg{font-size:var(--ptv-font-infoEpg,24px);line-height:1.32;min-width:0;white-space:normal;overflow-wrap:break-word}
+.player-info:not(.zapping) .player-line .player-label{font-size:var(--ptv-font-infoLabels,19px);width:105px;flex:0 0 105px}
+.player-info:not(.zapping) .player-line{align-items:baseline;min-height:35px}
+.player-info:not(.zapping) .player-group{font-size:var(--ptv-font-infoLabels,19px)}
+.player-info:not(.zapping) .player-description{font-size:var(--ptv-font-description,21px);margin-left:105px}
+.player-info:not(.zapping) .player-stats{font-size:var(--ptv-font-hints,18px)}
+.player-info:not(.zapping) .player-hint{font-size:var(--ptv-font-hints,18px)}
+/* Zapping: large logo with ONLY channel name below; EPG captions and text at right. */
+.player-info.zapping{
+  height:345px;min-height:345px;max-height:345px;
+  display:flex;flex-direction:column;overflow:hidden;
+  padding:11px 26px 14px;
+}
+.player-info.zapping .zap-carousel{flex:0 0 88px;height:88px;min-height:88px;max-height:88px;margin:0 0 7px}
+.player-info.zapping .zap-carousel-items{height:84px}
+.player-info.zapping .zap-channel-card{height:82px;min-height:82px;max-height:82px;padding:8px 11px}
+.player-info.zapping .zap-channel-title{font-size:var(--ptv-font-channel,22px);line-height:1.08}
+.player-info.zapping .zap-channel-program{font-size:var(--ptv-font-program,20px);line-height:1.08;margin-top:4px}
+.player-info.zapping .zap-channel-logo{width:53px;height:56px}
+.player-info.zapping .player-hero{flex:1 1 auto;min-height:0;display:flex;align-items:stretch;overflow:hidden;margin:0}
+.player-info.zapping .player-head{
+  flex:0 0 215px;width:215px;max-width:215px;min-width:215px;
+  min-height:0;max-height:none;height:auto;
+  margin:0 22px 0 0;padding:2px 5px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;
+}
+.player-info.zapping .player-logo{
+  display:block;width:104px;height:104px;max-width:104px;max-height:104px;
+  margin:0 0 8px;object-fit:contain;flex-shrink:0;
+  border-radius:11px;background:rgba(255,255,255,.07);
+}
+.player-info.zapping .player-title-group{width:100%;max-width:100%;margin:0;flex:0 0 auto;min-width:0;text-align:center;overflow:hidden}
+.player-info.zapping .player-name{
+  display:block;font-size:var(--ptv-font-zapName,24px);font-weight:600;
+  line-height:1.13;white-space:normal;overflow:hidden;text-overflow:clip;
+  max-height:2.28em;overflow-wrap:break-word;
+}
+.player-info.zapping .player-group,.player-info.zapping .live-tag{display:none!important}
+.player-info.zapping .player-programs{
+  flex:1 1 auto;min-width:0;min-height:0;display:flex;
+  flex-direction:column;justify-content:center;overflow:hidden;
+}
+.player-info.zapping .player-line{
+  flex:0 0 auto;display:flex;align-items:baseline;min-height:0;max-height:none;
+  margin:0 0 14px;padding:0 0 4px;overflow:hidden;
+}
+.player-info.zapping .player-line:last-child{margin-bottom:0}
+.player-info.zapping .player-label{
+  color:#d4d4d8;flex:0 0 110px;width:110px;font-weight:600;
+  font-size:var(--ptv-font-infoLabels,19px);line-height:1.2;
+}
+.player-info.zapping .player-line .player-epg{
+  display:block;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;font-size:var(--ptv-font-zapEpg,25px);line-height:1.20;
+  color:#f7f7f8;
+}
+.player-info.zapping .player-timeline{flex:0 0 auto;margin:5px 0 0}
+.player-info.zapping .player-progress-line{font-size:18px;line-height:1.2}
+.player-info.zapping .player-description,
+.player-info.zapping .player-stats,
+.player-info.zapping .player-hint{display:none}
+/* Live examples in Settings > Fonts use precisely the same variables. */
+.scene-zap-panel{position:absolute;left:4%;right:4%;bottom:6%;height:36%;max-height:340px;
+  border-radius:16px;padding:19px 24px;background:rgba(29,29,32,.84);display:flex;flex-direction:column}
+.scene-zap-carousel{display:flex;gap:9px;height:82px;flex:0 0 82px;overflow:hidden}
+.scene-zap-card{flex:1;min-width:0;padding:11px 12px;border-radius:9px;background:rgba(96,96,100,.46);overflow:hidden}
+.scene-zap-card.active{background:rgba(180,180,185,.65);outline:2px solid #eee}
+.scene-zap-card-title{font-size:var(--ptv-font-channel,22px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scene-zap-card-epg{font-size:var(--ptv-font-program,20px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scene-zap-hero{display:flex;flex:1;min-height:0;gap:20px;padding:8px 0}
+.scene-zap-logo-area{flex:0 0 195px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-width:0;overflow:hidden}
+.scene-zap-logo-area .scene-channel-logo{margin:0 0 8px;width:100px;height:100px}
+.scene-zap-name{font-size:var(--ptv-font-zapName,24px);line-height:1.1;max-height:2.2em;overflow:hidden}
+.scene-zap-programs{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.scene-zap-program{display:flex;align-items:baseline;min-width:0;overflow:hidden}
+.scene-zap-caption{font-size:var(--ptv-font-infoLabels,19px);flex:0 0 110px;color:#d6d6da}
+.scene-zap-epg{font-size:var(--ptv-font-zapEpg,25px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}
+.scene-zap-timeline{font-size:16px;color:#bcbcc2;flex:0 0 21px}
+.scene-info-program{display:flex;align-items:baseline;min-width:0}
+.scene-info-caption{font-size:var(--ptv-font-infoLabels,19px);flex:0 0 125px}
+.scene-info-epg{font-size:var(--ptv-font-infoEpg,24px);flex:1;min-width:0}
+@media(max-width:1200px){
+  .player-info.zapping{height:310px;min-height:310px;max-height:310px;padding:9px 16px 11px}
+  .player-info.zapping .zap-carousel{flex-basis:78px;height:78px;min-height:78px;max-height:78px}
+  .player-info.zapping .zap-carousel-items{height:74px}
+  .player-info.zapping .zap-channel-card{height:72px;min-height:72px;max-height:72px}
+  .player-info.zapping .player-head{flex-basis:155px;width:155px;max-width:155px;min-width:155px;margin-right:10px}
+  .player-info.zapping .player-logo{width:78px;height:78px;max-width:78px;max-height:78px;margin-bottom:4px}
+  .player-info.zapping .player-label{flex-basis:84px;width:84px}
+  .scene-zap-logo-area{flex-basis:145px}
+  .scene-zap-logo-area .scene-channel-logo{width:76px;height:76px}
+}

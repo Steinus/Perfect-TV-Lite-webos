@@ -1,0 +1,10 @@
+{
+  "id": "com.steinus.perfecttvwebos.network",
+  "description": "Perfect TV Lite playlist loader",
+  "services": [
+    {
+      "name": "com.steinus.perfecttvwebos.network",
+      "description": "IPTV playlist and XMLTV fetching"
+    }
+  ]
+}

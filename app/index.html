@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Perfect TV Lite</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app">
+  <video id="video" autoplay playsinline preload="auto"></video>
+  <div id="idle" class="idle">
+    <div class="idle-art"><span class="triangle">▶</span><span class="idle-orbit"></span></div>
+    <h1>Perfect <span>TV Lite</span></h1>
+    <p>webOS 0.3.5 · IPTV-плеер</p>
+    <small>Добавь M3U-плейлист в настройках, затем выбери канал</small>
+  </div>
+  <div id="topline" class="hidden"><div class="brand-mini"><span class="brand-icon">▶</span> Perfect <span>TV Lite</span><b class="webos-tag">webOS</b></div><div id="clock"></div></div>
+  <div id="playerInfo" class="player-info hidden">
+    <div id="zapCarousel" class="zap-carousel hidden" aria-hidden="true">
+      <div class="zap-carousel-heading"><span>ПЕРЕКЛЮЧЕНИЕ КАНАЛОВ</span><small>◀ Предыдущий &nbsp;&nbsp; Следующий ▶</small></div>
+      <div id="zapCarouselItems" class="zap-carousel-items"></div>
+    </div>
+    <div class="player-hero">
+      <div class="player-head"><img id="playerLogo" class="player-logo" alt="" /><div class="player-title-group"><div class="player-name" id="playerName"></div><div id="playerGroup" class="player-group"></div></div><span id="playerMode" class="live-tag">ЭФИР</span></div>
+      <div class="player-programs">
+        <div class="player-line"><span class="player-label">Сейчас</span><span id="playerEpg" class="player-epg"></span></div>
+        <div class="player-line"><span class="player-label">Далее</span><span id="playerNext" class="player-epg"></span></div>
+      </div>
+    </div>
+    <div id="playerDescription" class="player-description"></div>
+    <div id="playerTimeline" class="player-timeline hidden" aria-label="Прогресс текущей передачи">
+      <div class="player-progress-line">
+        <span id="playerTimelineElapsed" class="player-progress-time">00:00</span>
+        <span class="player-progress-track"><span id="playerTimelineFill" class="player-progress-fill"></span></span>
+        <span id="playerTimelineTotal" class="player-progress-time">00:00</span>
+        <span id="playerTimelineRemaining" class="player-progress-remaining">ещё —</span>
+      </div>
+    </div>
+    <div class="player-stats"><span id="playerResolution">Разрешение: —</span><span id="playerBitrate">Битрейт: —</span><span id="playerArchive">Архив: —</span><span id="playerNetRx" title="Суммарный сетевой трафик телевизора">↓ Приём ТВ: —</span><span id="playerNetTx" title="Суммарный сетевой трафик телевизора">↑ Передача ТВ: —</span></div>
+    <div class="player-hint">← / → — переключить канал · ↓ — информация · ↓↓ — история · ↑ — программа · OK — каналы группы · BACK — закрыть</div>
+  </div>
+  <div id="archiveSeek" class="archive-seek archive-controls hidden" role="dialog" aria-label="Управление архивом">
+    <div class="archive-top">
+      <img id="archiveSeekLogo" class="archive-channel-logo" alt="" />
+      <div class="archive-title-box">
+        <div class="archive-eyebrow">АРХИВ · <span id="archiveSeekChannel">Телеканал</span></div>
+        <div id="archiveSeekTitle" class="archive-program-title">Название передачи</div>
+        <div id="archiveSeekProgrammeTime" class="archive-program-time">Дата и время передачи</div>
+      </div>
+      <span class="archive-chip">ЗАПИСЬ</span>
+    </div>
+    <div id="archiveSeekDescription" class="archive-program-desc"></div>
+    <div class="archive-scrub-head"><span>Позиция в записи</span><strong id="archiveSeekPosition">—</strong></div>
+    <button id="archiveSeekTrack" class="archive-timeline" type="button" aria-label="Шкала записи: стрелки влево и вправо выбирают время" tabindex="0" role="slider" aria-valuemin="0" aria-valuenow="0" aria-valuemax="0">
+      <span class="archive-rail"><span id="archiveSeekBar" class="archive-progress"></span><span id="archiveSeekMarker" class="archive-dot"></span></span>
+    </button>
+    <div class="archive-time-legend"><span id="archiveSeekElapsed">00:00</span><span id="archiveSeekClock">—</span><span id="archiveSeekTotal">—</span></div>
+    <div id="archiveSeekStatus" class="archive-seek-status">← / → — положение на шкале; переход через 1 секунду после остановки</div>
+    <div class="archive-buttons">
+      <button id="archivePlayPause" type="button" class="archive-action"><span id="archivePlaySymbol" class="archive-action-icon">Ⅱ</span><span id="archivePlayLabel">Пауза</span></button>
+      <button id="archiveLiveDetails" type="button" class="archive-action">Что идёт сейчас</button>
+      <button id="archiveLiveButton" type="button" class="archive-action archive-live"><span class="archive-live-dot"></span>В прямой эфир</button>
+    </div>
+    <div class="archive-footnote">↑ / ↓ — шкала / кнопки · ← / → — выбор · OK — выполнить · BACK — закрыть</div>
+  </div>
+  <div id="loading" class="loading hidden"><div class="spinner"></div><span id="loadingText">Загрузка...</span></div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="side-head"><div class="side-heading"><span id="sidebarHeadingText">Телеканалы</span> <span id="channelCount">0</span></div><button id="settingsButton" data-focus="1" class="labeled-btn settings-action" title="Настройки плейлиста и EPG" aria-label="Настройки плейлиста и EPG"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2m0 14v2M4.2 4.2l1.4 1.4m12.8 12.8 1.4 1.4M3 12h2m14 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="5"/></svg><span>Настройки</span></button></div>
+    <div class="playlist-bar"><span id="playlistName">Нет плейлиста</span><button id="reloadButton" data-focus="1" class="labeled-btn reload-action" title="Вручную обновить M3U-плейлист" aria-label="Вручную обновить M3U-плейлист"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg><span>Обновить</span></button></div>
+    <div class="filter-controls">
+      <button class="mode active" id="modeAll" data-focus="1">Все</button>
+      <button class="mode" id="modeFav" data-focus="1">★ Избранное</button>
+      <button class="mode" id="modeGroups" data-focus="1">Группы</button>
+      <button class="mode" id="searchToggle" data-focus="1"><svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>Поиск</button>
+    </div>
+    <div id="searchBox" class="search-box hidden"><input id="searchInput" placeholder="Поиск канала..." autocomplete="off"/><button id="searchClear" data-focus="1" title="Очистить">×</button></div>
+    <div id="groups" class="groups hidden"></div>
+    <div class="list" id="channels" role="listbox"><div class="empty-list">Добавь плейлист, чтобы увидеть каналы</div></div>
+    <div class="sidebar-footer"><span>&uarr; &darr; &#8212; &#1074;&#1099;&#1073;&#1086;&#1088; &middot; OK &#8212; &#1089;&#1084;&#1086;&#1090;&#1088;&#1077;&#1090;&#1100;</span><span>&rarr; &#9734; &middot; OK &#8212; &#1080;&#1079;&#1073;&#1088;&#1072;&#1085;&#1085;&#1086;&#1077;</span></div>
+  </aside>
+
+  <!-- Group navigation for the compact browser opened by LEFT during playback. -->
+  <aside id="quickGroupPanel" class="quick-group-panel hidden" aria-label="Группы телеканалов">
+    <div class="quick-groups-title">ГРУППЫ КАНАЛОВ</div>
+    <div id="quickGroupList" class="quick-group-list"></div>
+    <div class="quick-groups-hint">↑ ↓ — группы · OK — выбрать · → — каналы · BACK — назад</div>
+  </aside>
+
+  <!-- Third LEFT level: actions, after channels and groups. -->
+  <aside id="quickActionsPanel" class="quick-group-panel quick-actions-panel hidden" aria-label="Действия и фильтры">
+    <div class="quick-groups-title">ДЕЙСТВИЯ</div>
+    <div id="quickActionsList" class="quick-group-list">
+      <button class="quick-group-item" id="quickActionSettings">Настройки</button>
+      <button class="quick-group-item" id="quickActionReload">Обновить M3U</button>
+      <button class="quick-group-item" id="quickActionAll">Все каналы</button>
+      <button class="quick-group-item" id="quickActionFavorites">Избранное</button>
+      <button class="quick-group-item" id="quickActionSearch">Поиск</button>
+    </div>
+    <div class="quick-groups-hint">↑ ↓ — выбор · OK — открыть · → / BACK — группы</div>
+  </aside>
+
+  <!-- OK menu: actions first, then genuinely watched channels, newest first. -->
+  <section id="recentPanel" class="recent-panel hidden" aria-label="История просмотра">
+    <div class="recent-top"><img id="recentLogo" class="recent-logo" alt=""/><div class="recent-meta">
+      <div id="recentTitle" class="recent-current-name"></div>
+      <div id="recentNow" class="recent-current-program"></div>
+      <div id="recentNext" class="recent-next-program"></div>
+    </div><div id="recentClock" class="recent-clock"></div></div>
+    <div class="recent-progress"><div id="recentProgressFill" class="recent-progress-fill"></div></div>
+    <div class="recent-actions" id="recentActions">
+      <button id="recentFavorite" class="recent-card recent-action-card"><span class="recent-action-icon">☆</span><span>Добавить в избранное</span></button>
+      <button id="recentGuide" class="recent-card recent-action-card"><span class="recent-action-icon">▦</span><span>Телегид</span></button>
+      <div id="recentChannels" class="recent-channel-cards"></div>
+    </div>
+    <div class="recent-hint">← → — выбор · OK — действие / открыть канал · BACK — закрыть</div>
+  </section>
+
+  <!-- Full multi-channel timeline, reads only the visible channels from the cached guide. -->
+  <section id="tvGrid" class="tv-grid hidden" aria-label="Телегид">
+    <div class="tv-grid-header"><strong>ТЕЛЕГИД · <span id="tvGridGroup">Текущая группа</span></strong><span>↑ ↓ — каналы · ← → — время · ←← — группы · OK — воспроизвести · BACK — назад</span></div>
+    <div class="tv-grid-times"><div class="tv-grid-label-col">Каналы</div><div id="tvGridTicks" class="tv-grid-ticks"></div></div>
+    <div id="tvGridRows" class="tv-grid-rows"></div>
+    <div id="tvGridDetails" class="tv-grid-details">Выбери передачу. Архив доступен для прошедших передач, если его поддерживает провайдер.</div>
+  </section>
+
+  <!-- Two consecutive LEFT presses in the TV guide show channel groups. -->
+  <aside id="tvGridGroupsPanel" class="tv-grid-groups hidden" aria-label="Группы каналов телегида">
+    <div class="quick-groups-title">ГРУППЫ ТЕЛЕГИДА</div>
+    <div id="tvGridGroupsList" class="quick-group-list"></div>
+    <div class="quick-groups-hint">↑ ↓ — группа · OK — выбрать · BACK — телегид</div>
+  </aside>
+
+  <!-- Archive playback: OK shows what is broadcasting LIVE right now. -->
+  <section id="archiveLivePanel" class="archive-live-panel hidden" role="dialog" aria-label="Сейчас в прямом эфире">
+    <div class="archive-live-heading"><span class="archive-live-badge">LIVE</span> СЕЙЧАС В ПРЯМОМ ЭФИРЕ</div>
+    <div class="archive-live-channel"><img id="archiveLiveLogo" alt="" /><div><div id="archiveLiveChannel" class="archive-live-name">Телеканал</div><div id="archiveLiveGroup" class="archive-live-group"></div></div></div>
+    <div id="archiveLiveNow" class="archive-live-program">Загружаю телепрограмму…</div>
+    <div id="archiveLiveTime" class="archive-live-time"></div>
+    <div class="archive-live-rail"><div id="archiveLiveProgress" class="archive-live-fill"></div></div>
+    <div id="archiveLiveNext" class="archive-live-next"></div>
+    <div id="archiveLiveDescription" class="archive-live-description"></div>
+    <div class="archive-live-actions"><button type="button" id="archiveLiveGo" class="archive-live-go">● В прямой эфир</button></div>
+    <div class="archive-live-hint">OK — перейти в эфир · BACK — продолжить архив</div>
+  </section>
+
+  <section id="guidePanel" class="guide-panel hidden" aria-label="Программа передач">
+    <div class="guide-head"><div class="guide-label">ПРОГРАММА ПЕРЕДАЧ</div><div class="guide-channel"><img id="guideLogo" class="guide-logo" alt=""/><div><h2 id="guideName">Канал</h2><div id="guideRange" class="guide-range">Загрузка...</div></div></div></div>
+    <div class="guide-body">
+      <div class="guide-list-column">
+        <div id="guideNavHint" class="guide-navhint">↑ ↓ — передачи · → — даты · ← — каналы</div>
+        <div id="guideRows" class="guide-rows"><div class="guide-empty">Выбери канал</div></div>
+        <div class="guide-footer">Прошедшие передачи: OK — архив, если поддерживается</div>
+      </div>
+      <div id="guideDates" class="guide-dates" aria-label="Выбор даты"></div>
+      <div class="guide-detail-column"><div class="guide-selected"><div id="guideSelectedTime" class="guide-selected-time"></div><div id="guideSelectedTitle" class="guide-selected-title"></div><div id="guideSelectedDesc" class="guide-selected-desc"></div></div></div>
+    </div>
+  </section>
+
+  <!-- Full-screen live typography preview; kept behind the translucent settings dialog. -->
+  <div id="fontScene" class="font-scene hidden" aria-hidden="true"></div>
+  <div id="settingsModal" class="modal hidden" role="dialog" aria-label="Настройки Perfect TV Lite">
+    <div class="modal-panel">
+      <div class="modal-top"><div><div class="eyebrow">PERFECT TV LITE · WEBOS</div><h2>Настройки</h2></div><button id="closeSettings" class="circle-btn" data-focus="1">×</button></div>
+      <p class="muted">Профили плейлистов и размеры текста хранятся на телевизоре.</p>
+      <div class="settings-tabs">
+        <button id="settingsTabPlaylists" type="button" class="settings-tab selected" data-focus="1">Плейлисты</button>
+        <button id="settingsTabFonts" type="button" class="settings-tab" data-focus="1">Шрифты</button>
+      </div>
+      <div id="settingsPlaylistSection" class="settings-section">
+        <div class="section-heading">Мои плейлисты</div>
+        <div id="playlistProfiles" class="playlist-profiles"></div>
+        <div class="profile-actions">
+          <button id="playlistAdd" class="btn" data-focus="1">+ Добавить плейлист</button>
+          <button id="playlistDelete" class="btn btn-danger" data-focus="1">Удалить выбранный</button>
+        </div>
+        <div id="playlistProfileNote" class="profile-note">Выбери плейлист для переключения или добавь новый.</div>
+
+      <div class="field"><label for="playlistUrl">URL M3U-плейлиста</label><input id="playlistUrl" type="text" autocomplete="off" spellcheck="false" placeholder="http://192.168.1.42:8080/playlist.m3u" /></div>
+      <div id="playlistFileNote" class="profile-note">Импортируй M3U-файл с компьютера или телефона через веб-редактор по QR. Файл будет сохранён прямо на телевизоре.</div>
+      <div class="field"><button id="playlistFileInfo" type="button" class="btn" data-focus="1">Импортировать M3U-файл через веб-редактор</button></div>
+      <div class="field"><label for="epgUrl">XMLTV EPG (необязательно)</label><input id="epgUrl" type="text" autocomplete="off" spellcheck="false" placeholder="https://provider.example/guide.xml" /></div>
+      <div class="field"><label for="playlistTitle">Название плейлиста (необязательно)</label><input id="playlistTitle" type="text" autocomplete="off" placeholder="Моё IPTV" /></div>
+      <div class="remote-settings">
+        <div class="remote-heading">Настройка с телефона / компьютера</div>
+        <div id="remoteStatus" class="remote-status">Запускаю локальную веб-страницу...</div>
+        <div class="remote-body"><div class="remote-code-column"><div id="remoteQr" class="remote-qr"></div>
+          <div id="remoteAddress" class="remote-address">—</div></div>
+          <div class="remote-details"><div>Веб-редактор всех плейлистов и импорт M3U-файлов</div><div id="remotePin" class="remote-pin"></div>
+            <div class="remote-help">Открой адрес в браузере ПК или телефона и введи код с ТВ. Там отображаются все плейлисты: можно добавлять по ссылке или файлом, редактировать, удалять и менять активный профиль.</div>
+            <div class="remote-help">Веб-редактор доступен только пока открыты настройки телевизора.</div>
+          </div>
+        </div>
+      </div>
+      <div class="action-row"><button id="saveSettings" data-focus="1" class="btn btn-primary">Сохранить и загрузить</button><button id="refreshEpg" data-focus="1" class="btn">Обновить EPG</button></div>
+      <div id="serviceStatus" class="statusline">Проверка сетевого сервиса...</div>
+      <div id="epgStatus" class="statusline epg-status">EPG: не загружен</div>
+      <div id="epgDebug" class="epg-debug"></div>
+      </div><!-- settingsPlaylistSection -->
+      <div id="settingsFontSection" class="settings-section hidden">
+        <div class="section-heading">Размеры шрифтов</div>
+        <p class="font-note">Выбери размер кнопками − / +. За настройками показывается полноэкранный образец выбранного меню; пример меняется сразу. Изменения сохраняются автоматически.</p>
+        <div id="fontControls" class="font-controls"></div>
+        <button id="resetFonts" class="btn" type="button" data-focus="1">Вернуть стандартные размеры</button>
+      </div>
+      <div class="helpbox"><b>Управление:</b> при просмотре: ← / → — предыдущий / следующий канал, ↑ — программа запущенного канала, ↓ — информация, ещё ↓ — избранное / телегид / недавно просмотренные. При просмотре архива ↓ — управление записью, а OK — каналы текущей группы. В меню каналов ← — группы, ещё ← — действия. BACK — назад. P+ / P− также переключают каналы. В списке стрелки — навигация, OK — просмотр. На компьютере можно использовать клавиатуру.<br /><br /><b>Ограничения:</b> поддержка потока зависит от версии webOS и кодеков; RTSP/UDP и некоторые TS-потоки могут не воспроизводиться. Архив доступен только если провайдер описал поддерживаемый способ доступа к нему в M3U. Сетевой редактор не защищает трафик шифрованием — используйте доверенную домашнюю сеть.</div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

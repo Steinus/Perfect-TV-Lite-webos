@@ -1,0 +1,15 @@
+{
+  "id": "com.steinus.perfecttvwebos",
+  "version": "0.3.7",
+  "vendor": "Community test build",
+  "type": "web",
+  "main": "index.html",
+  "title": "Perfect TV Lite",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "appDescription": "Лёгкий IPTV-плеер с EPG и архивом для LG webOS",
+  "resolution": "1920x1080",
+  "iconColor": "#111827",
+  "bgColor": "#070b14",
+  "disableBackHistoryAPI": true
+}
